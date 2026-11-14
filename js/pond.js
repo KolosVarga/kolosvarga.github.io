@@ -50,7 +50,7 @@ function layoutName() {
   const two = W / H < 1.25;
   const lines = two ? ['Kolos', 'Varga'] : ['Kolos Varga'];
   const m = document.createElement('canvas').getContext('2d');
-  m.font = '800 100px Fraunces';
+  m.font = '400 100px "Young Serif", Georgia, serif';
   const widest = Math.max(...lines.map(l => m.measureText(l).width));
   const lh = 0.9;
   const maxW = W * (two ? 0.84 : 0.8);
@@ -59,6 +59,26 @@ function layoutName() {
   const blockH = size * lh * lines.length;
   const cy = (top + bottom) / 2;
   return { lines, size, lh, cy, blockH, top, two, width: widest * size / 100 };
+}
+
+// The name heading: built once as letter spans (for the reveal), then sized and placed to match the layout.
+const title = document.getElementById('title');
+function buildTitle() {
+  title.innerHTML = '';
+  ['Kolos', 'Varga'].forEach((word, w) => {
+    const line = document.createElement('span');
+    line.className = 'line'; line.setAttribute('aria-hidden', 'true');
+    for (const ch of word) { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; line.appendChild(s); }
+    title.appendChild(line);
+    if (w === 0) { const gap = document.createElement('span'); gap.className = 'gap'; gap.textContent = ' '; title.appendChild(gap); }
+  });
+}
+buildTitle();
+function placeTitle(L) {
+  title.classList.toggle('stacked', L.two);
+  title.style.fontSize = `${L.size}px`;
+  title.style.lineHeight = String(L.lh);
+  title.style.top = `${L.cy - L.blockH / 2}px`;
 }
 
 function buildBed() {
@@ -78,22 +98,9 @@ function buildBed() {
   }
   b.globalAlpha = 1;
 
+  // the name now floats above the pond as an HTML heading; the bed texture stays empty of text
   const name = document.createElement('canvas'); name.width = cw; name.height = ch;
-  const n = name.getContext('2d');
-  n.scale(DPR, DPR);
-  n.textAlign = 'center'; n.textBaseline = 'middle';
-  n.font = `800 ${L.size}px Fraunces`;
-  const startY = L.cy - L.blockH / 2 + (L.size * L.lh) / 2;
-  const grad = n.createLinearGradient(0, L.cy - L.blockH / 2, 0, L.cy + L.blockH / 2);
-  grad.addColorStop(0, PAL.nameTop); grad.addColorStop(1, PAL.nameBottom);
-  L.lines.forEach((line, i) => {
-    const y = startY + i * L.size * L.lh;
-    n.save();
-    n.shadowColor = 'rgba(0,0,0,0.75)'; n.shadowBlur = L.size * 0.06; n.shadowOffsetX = L.size * 0.02; n.shadowOffsetY = L.size * 0.03;
-    n.fillStyle = grad; n.fillText(line, W / 2, y);
-    n.restore();
-    n.lineWidth = Math.max(1, L.size * 0.006); n.strokeStyle = PAL.nameEdge; n.strokeText(line, W / 2, y);
-  });
+  placeTitle(L);
   nameBox = { x: W / 2 - L.width / 2 - L.size * 0.08, y: L.cy - L.blockH / 2 - L.size * 0.08, w: L.width + L.size * 0.16, h: L.blockH + L.size * 0.16 };
   lotusSpot = L.two
     ? { x: W / 2 + L.width * 0.28, y: L.cy }
@@ -760,7 +767,7 @@ if (window.Lenis && !reduceMotion) {
 
 /* ================= start ================= */
 await Promise.race([
-  Promise.all([document.fonts.load('800 100px Fraunces'), document.fonts.load('500 16px "Instrument Sans"')]),
+  Promise.all([document.fonts.load('400 100px "Young Serif"'), document.fonts.load('500 16px "Instrument Sans"')]),
   new Promise(r => setTimeout(r, 2500))
 ]);
 // don't build the pond until it has a real size (it can be 0×0 for a moment while the page lays out)
@@ -780,7 +787,8 @@ new ResizeObserver(() => {
 
 // opening: the bar settles in, the name surfaces, pads unfurl, the first drop lands
 gsap.from(bar, { y: -30, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.2 });
-gsap.to(reveal, { name: 1, duration: 2.2, ease: 'power2.inOut', delay: 0.3 });
+// the name rises letter by letter (React Bits "SplitText" style, in GSAP)
+gsap.fromTo('#title .ch', { yPercent: 60, opacity: 0, filter: 'blur(6px)' }, { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out', stagger: 0.06, delay: 0.35 });
 gsap.to(reveal, { life: 1, duration: 1.4, ease: 'power2.out', delay: 0.5 });
 gsap.to(pads, { scale: 1, duration: 1.1, ease: 'back.out(1.6)', stagger: { each: 0.03, from: 'random' }, delay: 0.6 });
 gsap.to(hint, { opacity: 1, duration: 0.8, delay: 2.4 });
