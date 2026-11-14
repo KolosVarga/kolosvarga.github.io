@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kolos Varga</title>
+  <meta name="description" content="Kolos Varga, engineering student. Projects, experience, and resume." />
+  <meta property="og:title" content="Kolos Varga" />
+  <meta property="og:description" content="Engineering student. Projects, experience, and resume." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#140b08" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23140b08'/%3E%3Cellipse cx='26' cy='44' rx='10' ry='7' transform='rotate(-20 26 44)' fill='%23f2a65a'/%3E%3Cpath d='M35 42 V12 q10 4 14 14' stroke='%23f2a65a' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Shantell+Sans:ital,wght@0,500;0,700;1,800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- GSAP + ScrollTrigger drive the scroll choreography; Lenis gives smooth, weighted scrolling -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <a href="#top" class="nav-name">Kolos Varga</a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="#story">Story</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <!-- EDIT: put your resume at assets/Kolos_Varga_Resume.pdf -->
+      <a href="assets/Kolos_Varga_Resume.pdf" class="nav-resume" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ================= 1–2. JAZZ BAR → MANGA PAGES =================
+         One pinned sequence, choreographed with GSAP ScrollTrigger:
+         the painted bar inks into a manga panel, then the pages flip. -->
+    <section class="manga" id="story">
+      <div class="manga-stage" id="manga-stage">
+
+        <!-- page 3 (bottom of the stack) -->
+        <div class="mpage page-tech" id="mp3">
+          <div class="burst" aria-hidden="true"></div>
+          <div class="panel chapter slam">
+            <p class="chapter-no">Chapter two</p>
+            <h2>Small signals</h2>
+          </div>
+          <div class="panel panel-3d slam" id="pcb-host">
+            <div class="bubble bubble-on-3d">Code is how I get the hardware to do something interesting.</div>
+          </div>
+          <div class="panel text-panel slam">
+            <!-- EDIT -->
+            <p>[What you're learning right now, and why. For example: embedded C on microcontrollers, robotics, or data from sensors. Be specific.]</p>
+          </div>
+          <div class="panel caption-panel slam">
+            <p class="caption">Next stop: the water.</p>
+          </div>
+          <span class="folio">3</span>
+        </div>
+
+        <!-- page 2 -->
+        <div class="mpage page-eng" id="mp2">
+          <div class="burst" aria-hidden="true"></div>
+          <div class="panel chapter slam">
+            <p class="chapter-no">Chapter one</p>
+            <h2>Things that move</h2>
+          </div>
+          <div class="panel panel-3d slam" id="gears-host">
+            <span class="sfx sfx-a" aria-hidden="true">whirr</span>
+          </div>
+          <div class="panel caption-panel slam">
+            <p class="caption">I like problems you can hold in your hands.</p>
+          </div>
+          <div class="panel text-panel hatch slam">
+            <!-- EDIT -->
+            <p>[Two or three sentences about the engineering you enjoy most: designing parts in CAD, building and testing prototypes, working out why something failed and fixing it.]</p>
+          </div>
+          <span class="folio">2</span>
+          <div class="shade" aria-hidden="true"></div>
+        </div>
+
+        <!-- page 1 (top): the bar lives here and becomes its first panel -->
+        <div class="mpage page-one" id="mp1">
+          <div class="burst" aria-hidden="true"></div>
+          <div class="slot-bar" id="slot-bar"></div>
+          <div class="panel p-hello slam">
+            <div class="bubble bubble-big">Hi, I'm Kolos.</div>
+          </div>
+          <div class="panel p-day slam">
+            <!-- EDIT -->
+            <p class="caption">By day I study [mechanical] engineering at [University]. By night I'm usually somewhere near a piano.</p>
+          </div>
+          <div class="panel p-now slam">
+            <!-- EDIT -->
+            <p class="p-now-text">Right now I'm looking for a [summer 20XX] internship in [field].</p>
+            <p class="p-now-links">
+              <a href="#projects">See my projects</a>
+              <a href="assets/Kolos_Varga_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+              <a href="mailto:you@example.com">Email</a>
+            </p>
+          </div>
+          <span class="folio">1</span>
+          <div class="bar-host" id="bar-host" aria-label="An illustrated jazz club, seen from a front-row table. Move your cursor to look around and over the instruments to play them."></div>
+          <div class="bar-border" id="bar-border" aria-hidden="true"></div>
+          <div class="shade" aria-hidden="true"></div>
+        </div>
+
+        <div class="intro-copy" id="intro-copy">
+          <h1 class="split">Kolos Varga</h1>
+          <p class="intro-sub">Engineering student, trumpet and piano player, rower.</p>
+          <p class="intro-hint"><span class="hint-mouse">Move your cursor to look around. Hover over the instruments.</span><span class="hint-touch">Drag to look around. Tap the instruments.</span></p>
+        </div>
+        <div class="scroll-cue" id="scroll-cue" aria-hidden="true"><span>Scroll</span><i></i></div>
+      </div>
+    </section>
+
+    <!-- ================= 3. THE STROKE =================
+         Close-up of an oar taking one stroke. The wash covers the screen and opens into Oregon. -->
+    <section class="stroke" id="stroke">
+      <div class="stroke-stage">
+        <div class="stroke-host" id="stroke-host" aria-hidden="true"></div>
+        <p class="stroke-line" id="stroke-line">Most mornings start on the water.</p>
+        <div class="wash" id="wash" aria-hidden="true">
+          <i class="foam f1"></i><i class="foam f2"></i><i class="foam f3"></i>
+        </div>
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <filter id="foamy" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="4" result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="70" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ================= 4. OREGON: projects and the rest ================= -->
+    <section class="oregon" id="projects">
+      <div class="forest-sticky" aria-hidden="true"><div class="forest-host" id="forest-host"></div></div>
+
+      <div class="oregon-content">
+        <header class="o-intro">
+          <h2 class="split">Projects</h2>
+          <p>Things I've designed and built, for classes, for teams, and on my own time.</p>
+        </header>
+
+        <!-- EDIT: your strongest project. Replace .ph with <img src="assets/projects/name.jpg" alt="..."> -->
+        <article class="o-block proj-feature">
+          <div class="proj-media"><div class="ph">Project photo</div></div>
+          <div class="proj-text">
+            <p class="meta">[20XX], [course / team / personal] project</p>
+            <h3>[Project title]</h3>
+            <p>[What problem were you solving? What did you build? What happened when you tested it? Three or four sentences, with a real result if you have one.]</p>
+            <p class="tools">[SolidWorks, Arduino, 3D printing]</p>
+            <p class="links"><a href="#">Write-up</a><a href="#">Code</a></p>
+          </div>
+        </article>
+
+        <div class="proj-pair">
+          <article class="o-block proj-tall">
+            <div class="ph ph-wide">Project photo</div>
+            <p class="meta">[20XX], [course / team / personal] project</p>
+            <h3>[Project title]</h3>
+            <p>[Your second strongest project, in two or three sentences.]</p>
+            <p class="tools">[Python, sensors]</p>
+            <p class="links"><a href="#">Write-up</a></p>
+          </article>
+          <article class="o-block proj-small">
+            <p class="meta">[20XX]</p>
+            <h3>[Project title]</h3>
+            <p>[A smaller project without a photo. One or two sentences is enough.]</p>
+            <p class="links"><a href="#">Code</a></p>
+          </article>
+        </div>
+
+        <div class="o-block proj-list">
+          <h3>Smaller things</h3>
+          <!-- EDIT -->
+          <ul>
+            <li><a href="#"><span class="pl-name">[Project name]</span><span class="pl-desc">[One sentence on what it is.]</span><span class="pl-year">[20XX]</span></a></li>
+            <li><a href="#"><span class="pl-name">[Project name]</span><span class="pl-desc">[One sentence on what it is.]</span><span class="pl-year">[20XX]</span></a></li>
+            <li><a href="#"><span class="pl-name">[Project name]</span><span class="pl-desc">[One sentence on what it is.]</span><span class="pl-year">[20XX]</span></a></li>
+          </ul>
+        </div>
+
+        <section class="o-block experience" id="experience">
+          <h2 class="split">Experience</h2>
+          <div class="tl">
+            <!-- EDIT: most recent first -->
+            <div class="tl-row">
+              <p class="tl-when">[Month 20XX] to [Month 20XX]</p>
+              <div><h3>[Role] <span>at [Company or lab]</span></h3><p>[What you worked on and what came of it.]</p></div>
+            </div>
+            <div class="tl-row">
+              <p class="tl-when">[20XX] to present</p>
+              <div><h3>[Role] <span>at [Club, team, or job]</span></h3><p>[What you were responsible for.]</p></div>
+            </div>
+            <div class="tl-row">
+              <p class="tl-when">[20XX] to [20XX]</p>
+              <div><h3>[B.S. in ___ Engineering] <span>at [University]</span></h3><p>[Expected graduation, relevant courses.]</p></div>
+            </div>
+          </div>
+          <dl class="skills">
+            <!-- EDIT: only what you'd be comfortable being asked about in an interview -->
+            <div><dt>Design</dt><dd>[SolidWorks, Fusion 360, 3D printing]</dd></div>
+            <div><dt>Programming</dt><dd>[Python, C++, MATLAB]</dd></div>
+            <div><dt>Hardware</dt><dd>[Arduino, soldering, basic circuit design]</dd></div>
+          </dl>
+          <p class="links"><a href="assets/Kolos_Varga_Resume.pdf" target="_blank" rel="noopener">Download the full resume (PDF)</a></p>
+        </section>
+
+        <section class="o-block about" id="about">
+          <div class="about-text">
+            <h2 class="split">About</h2>
+            <!-- EDIT: in your own voice -->
+            <p class="about-lead">Most of what I know about working hard I learned in a rowing shell.</p>
+            <p>I row [for my university / with a club]. A boat only goes fast when everyone does the same small things right, thousands of times in a row. I try to bring that patience to engineering.</p>
+            <p>I also play trumpet and piano. Practice taught me to break hard things into small pieces, and playing in groups taught me to listen as much as I contribute.</p>
+          </div>
+          <figure class="about-photo">
+            <!-- EDIT: drop a photo at assets/portrait.jpg -->
+            <img src="assets/portrait.jpg" alt="Kolos Varga" onerror="this.parentElement.classList.add('empty'); this.remove()" />
+            <figcaption>[Caption]</figcaption>
+          </figure>
+        </section>
+
+        <section class="o-block contact" id="contact">
+          <h2 class="split">Say hello</h2>
+          <p>The best way to reach me is email.</p>
+          <!-- EDIT -->
+          <p><a class="contact-email magnet" href="mailto:you@example.com">you@example.com</a></p>
+          <p class="links">
+            <a href="https://github.com/KolosVarga" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="assets/Kolos_Varga_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+          </p>
+        </section>
+
+        <footer class="footer">© <span id="year"></span> Kolos Varga</footer>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

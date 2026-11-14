@@ -1,0 +1,100 @@
+/* Kolos Varga — koi pond intro
+   Palette taken from the reference: near-black water, jade lily pads, white koi. */
+:root {
+  --water: #050909;
+  --jade: #2fbf93;
+  --jade-deep: #1a8a69;
+  --mist: #d9ece5;
+  --mist-dim: rgba(217, 236, 229, 0.62);
+  --glass: rgba(7, 15, 14, 0.62);
+  --edge: rgba(150, 230, 200, 0.14);
+  --ui: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body {
+  background: var(--water);
+  color: var(--mist);
+  font-family: var(--ui);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- pond ---------- */
+.pond { position: relative; height: 100vh; height: 100svh; overflow: hidden; touch-action: manipulation; }
+#water, #surface, #pads { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+/* water, koi and ripples render at low resolution and scale up with hard pixel edges;
+   the lily pads sit on their own full-resolution layer above */
+#water, #surface {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+.pond { cursor: crosshair; }
+.hint {
+  position: absolute; left: 50%; bottom: max(22px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  margin: 0; font-size: 14px; letter-spacing: 0.02em; color: var(--mist-dim);
+  pointer-events: none; opacity: 0;
+}
+.hint-touch { display: none; }
+@media (hover: none) { .hint-mouse { display: none; } .hint-touch { display: inline; } }
+
+/* ---------- top bar ---------- */
+.bar {
+  position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--glass);
+  border: 1px solid var(--edge);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.7);
+}
+.mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; margin-right: 4px; }
+.mark svg { width: 24px; height: 24px; fill: var(--jade); }
+.links { display: flex; gap: 2px; }
+.link {
+  position: relative; padding: 10px 16px; border-radius: 999px;
+  font-size: 15px; font-weight: 500; color: var(--mist);
+  transition: background-color .2s, color .2s;
+}
+.link:hover, .link:focus-visible { background: rgba(47, 191, 147, 0.12); color: #fff; outline: none; }
+.resume {
+  margin-left: 4px; padding: 10px 18px; border-radius: 999px;
+  background: var(--jade); color: #03130d; font-size: 15px; font-weight: 600;
+  transition: background-color .2s;
+}
+.resume:hover, .resume:focus-visible { background: #4fd8ab; outline: none; }
+.menu-btn { display: none; }
+
+/* phone layout: mark on the left, a "Menu" pill on the right */
+.sheet {
+  position: fixed; z-index: 19; left: 12px; right: 12px; top: calc(max(14px, env(safe-area-inset-top)) + 64px);
+  display: flex; flex-direction: column; padding: 8px;
+  border-radius: 22px; background: rgba(7, 15, 14, 0.9); border: 1px solid var(--edge);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.sheet[hidden] { display: none; }
+.sheet .link { text-align: left; font-size: 20px; padding: 14px 16px; border-radius: 14px; }
+.sheet .resume-link { color: var(--jade); }
+
+@media (max-width: 640px) {
+  .bar { left: 12px; right: 12px; transform: none; justify-content: space-between; padding: 6px 6px 6px 8px; }
+  .links, .resume { display: none; }
+  .menu-btn {
+    display: block; padding: 10px 18px; border-radius: 999px;
+    background: var(--jade); color: #03130d; font-weight: 600; font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link, .resume { transition: none; }
+}
