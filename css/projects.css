@@ -1,11 +1,35 @@
-/* Projects: a header of slowly moving contour lines, an index you can read in five seconds,
-   then each project told as its own story with its own composition. */
+/* Projects: a pixel-art space scene with the title floating over it (as the name floats over the pond),
+   an index you can read in five seconds, then each project told as its own story. */
 
-.p-head { position: relative; min-height: min(86vh, 820px); display: flex; align-items: flex-end; overflow: hidden; }
-.p-head .contours { position: absolute; inset: 0; width: 100%; height: 100%; }
-.p-head-in { position: relative; padding-top: 150px; padding-bottom: clamp(40px, 8vh, 88px); }
-.p-head .display { font-size: clamp(3.6rem, 14vw, 12rem); }
-.p-head .lede { margin-top: 22px; max-width: 44ch; }
+.p-space { position: relative; height: 100vh; height: 100svh; min-height: 520px; overflow: hidden; }
+.p-space canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  image-rendering: pixelated; image-rendering: crisp-edges; image-rendering: pixelated;
+  touch-action: pan-y;
+  /* space fades into the page's black at the bottom, the way the pond does */
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 16vh), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 16vh), transparent);
+}
+.p-title {
+  position: absolute; z-index: 2; left: 0; right: 0; top: 40%;
+  margin: 0; text-align: center; white-space: nowrap;
+  font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; line-height: 0.9;
+  font-size: clamp(4rem, 15vw, 13rem); color: #eef6f2;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.35), 0 8px 40px rgba(0, 0, 0, 0.55);
+  pointer-events: none; user-select: none;
+}
+.p-title .ch { display: inline-block; }
+.p-hint {
+  position: absolute; z-index: 2; left: 50%; bottom: max(22px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  margin: 0; font-size: 14px; letter-spacing: 0.02em; color: var(--ink-dim); white-space: nowrap;
+  pointer-events: none; transition: opacity .6s ease;
+  animation: hint-in .8s 2.2s ease both;
+}
+.p-hint.gone { opacity: 0; }
+.p-hint .hint-touch { display: none; }
+@media (hover: none) { .p-hint .hint-mouse { display: none; } .p-hint .hint-touch { display: inline; } }
+@keyframes hint-in { from { opacity: 0; } }
+.p-intro .lede { margin: clamp(8px, 2vh, 24px) 0 0; max-width: 44ch; }
 
 /* ---------- index ---------- */
 .p-index { margin-top: clamp(24px, 4vh, 48px); }

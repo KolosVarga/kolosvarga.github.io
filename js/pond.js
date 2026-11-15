@@ -733,22 +733,6 @@ function callFish(el) {
 }
 document.querySelectorAll('.link, .resume').forEach(el => el.addEventListener('click', () => callFish(el)));
 
-// phone menu
-const menuBtn = document.getElementById('menu-btn'), sheet = document.getElementById('sheet');
-const setMenu = open => {
-  menuBtn.setAttribute('aria-expanded', String(open));
-  menuBtn.textContent = open ? 'Close' : 'Menu';
-  if (open) {
-    sheet.hidden = false;
-    gsap.fromTo(sheet, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' });
-    gsap.fromTo(sheet.children, { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, ease: 'power3.out' });
-  } else {
-    gsap.to(sheet, { opacity: 0, y: -12, duration: 0.25, ease: 'power2.in', onComplete: () => { sheet.hidden = true; } });
-  }
-};
-menuBtn.addEventListener('click', () => { setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'); });
-sheet.addEventListener('click', e => { if (e.target.closest('.link')) setTimeout(() => setMenu(false), 450); });
-
 // magnetic buttons (React Bits "Magnet", rebuilt with GSAP)
 if (window.matchMedia('(hover: hover)').matches && !reduceMotion) {
   document.querySelectorAll('.bar .link, .bar .resume, .mark').forEach(el => {
@@ -759,10 +743,11 @@ if (window.matchMedia('(hover: hover)').matches && !reduceMotion) {
   });
 }
 
-// Lenis: ready for when the page grows past the pond
+// Lenis: smooth scrolling down to the About section (home-nav.js uses it for the About link)
 if (window.Lenis && !reduceMotion) {
   const lenis = new window.Lenis({ lerp: 0.1 });
   gsap.ticker.add(t => lenis.raf(t * 1000));
+  window.lenis = lenis;
 }
 
 /* ================= start ================= */

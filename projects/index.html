@@ -24,7 +24,7 @@
     </a>
     <nav class="links" aria-label="Primary">
       <a class="link" href="../projects/" aria-current="page">Projects</a>
-      <a class="link" href="../about/">About</a>
+      <a class="link" href="../#about">About</a>
       <a class="link" href="../hobbies/">Hobbies</a>
       <a class="link" href="../contact/">Contact</a>
     </nav>
@@ -35,19 +35,22 @@
     <a class="link" href="../">Home</a>
     <a class="link" href="../projects/" aria-current="page">Projects</a>
     <a class="link" href="../resume/">Resume</a>
-    <a class="link" href="../about/">About</a>
+    <a class="link" href="../#about">About</a>
     <a class="link" href="../hobbies/">Hobbies</a>
     <a class="link" href="../contact/">Contact</a>
   </div>
 
   <main id="main">
-    <section class="p-head">
-      <canvas class="contours" id="contours" aria-hidden="true"></canvas>
-      <div class="wrap p-head-in">
-        <h1 class="display" data-split>Projects</h1>
-        <!-- EDIT: one or two sentences in your own voice -->
-        <p class="lede" data-reveal>Things I have designed, built, tested and rebuilt. Each one is written up the way I would explain it at a lab bench: why it existed, what made it hard, how it came together, and what happened.</p>
-      </div>
+    <section class="p-space" id="space" aria-labelledby="p-title">
+      <canvas aria-hidden="true"></canvas>
+      <h1 class="p-title" id="p-title" data-split>Projects</h1>
+      <p class="sr-only">A pixel-art space scene: human and alien spacecraft fly between planets. You can grab a ship and throw it.</p>
+      <p class="p-hint" id="space-hint" aria-hidden="true"><span class="hint-mouse">Grab a ship and throw it</span><span class="hint-touch">Grab a ship and fling it</span></p>
+    </section>
+
+    <section class="wrap p-intro">
+      <!-- EDIT: one or two sentences in your own voice -->
+      <p class="lede" data-reveal>Things I have designed, built, tested and rebuilt. Each one is written up the way I would explain it at a lab bench: why it existed, what made it hard, how it came together, and what happened.</p>
     </section>
 
     <!-- EDIT: keep these titles in sync with the stories below -->
@@ -229,7 +232,6 @@
     </section>
 
     <div class="wrap">
-      <a class="next" href="../resume/"><span class="note">Next room</span><span class="h2">The resume <span class="arrow" aria-hidden="true">→</span></span></a>
       <footer class="foot">
         <span>Kolos Varga</span>
         <nav aria-label="Elsewhere">

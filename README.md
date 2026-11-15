@@ -7,20 +7,23 @@ Personal website. Plain HTML/CSS/JS with no build step, served by GitHub Pages.
   the bar buttons tap the water and call the fish over.
 - `css/style.css`: colors live in `:root`.
 
+Below the pond the home page scrolls into a short About section and a row of links (Resume, GitHub, LinkedIn,
+Email, Instagram): `css/home.css`, `js/home.js`. The links are placeholders in `index.html`.
+
 ## The other rooms
-Each page is its own folder with an `index.html`, so URLs stay clean (`/projects/`, `/about/` …).
+Each page is its own folder with an `index.html`, so URLs stay clean (`/projects/`, `/hobbies/` …). `/about/` now just forwards to the About section on the home page..
 Shared look and behaviour: `css/site.css` (colour tokens, type, the bar) and `js/site.js` (menu, magnetic bar,
 Lenis, headline split, scroll reveals, and a loop helper that pauses canvases when they are off screen).
 
 | Page | Small interactive identity | Files |
 | --- | --- | --- |
-| Projects | contour lines that drift and bend around the cursor; sketches that draw themselves in | `css/projects.css`, `js/projects.js` |
+| Projects | a pixel-art space scene: ships fly between planets, chase and shoot; grab one and throw it (at a planet, it explodes); sketches draw themselves in | `css/projects.css`, `js/space.js`, `js/projects.js` |
 | Resume | cool paper, a ruler down the edge, a caliper that measures how far you have read; prints cleanly | `css/resume.css`, `js/resume.js` |
-| About | a breaking wave built from keyboard symbols; spray lands on the headline | `css/about.css`, `js/wave.js` |
 | Hobbies | a pixel pond: frogs hop between pads and go for dragonflies; fish idle below | `css/hobbies.css`, `js/hobbies.js` |
 | Contact | paper scraps drifting on water, which you can grab and toss | `css/contact.css`, `js/contact.js` |
 
-On the pond, `js/home-nav.js` lets a nav click ripple the water for half a second before following the link.
+On the pond, `js/home-nav.js` lets a nav click ripple the water for half a second before following the link,
+and scrolls to About instead of leaving the page.
 Every animation pauses off screen and is skipped with `prefers-reduced-motion`.
 
 **Filling it in:** everything in `[square brackets]` is yours to replace, and `<!-- EDIT -->` comments mark the spots.
@@ -39,3 +42,7 @@ Then open http://localhost:8080.
 
 ## MCP servers
 `.mcp.json` lists the MCP servers Claude Code connects to for this project.
+
+## Claude Code skills
+`.claude/skills/` holds Emil Kowalski's design-engineering skills (from `emilkowalski/skills`, MIT; see
+`.claude/skills/LICENSE-emilkowalski`). They guide animation and interaction work in this repo.

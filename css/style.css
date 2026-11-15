@@ -86,26 +86,23 @@ a { color: inherit; text-decoration: none; }
   transition: background-color .2s;
 }
 .resume:hover, .resume:focus-visible { background: #4fd8ab; outline: none; }
-.menu-btn { display: none; }
+.link[aria-current="true"] { background: rgba(47, 191, 147, 0.16); color: #fff; }
+.link:active, .resume:active { scale: 0.97; }
 
-/* phone layout: mark on the left, a "Menu" pill on the right */
-.sheet {
-  position: fixed; z-index: 19; left: 12px; right: 12px; top: calc(max(14px, env(safe-area-inset-top)) + 64px);
-  display: flex; flex-direction: column; padding: 8px;
-  border-radius: 22px; background: rgba(7, 15, 14, 0.9); border: 1px solid var(--edge);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-}
-.sheet[hidden] { display: none; }
-.sheet .link { text-align: left; font-size: 20px; padding: 14px 16px; border-radius: 14px; }
-.sheet .resume-link { color: var(--jade); }
-
+/* phones: every page stays one tap away. The links tighten up instead of folding into a menu,
+   and the mark steps aside on the narrowest screens (the name below is home anyway). */
 @media (max-width: 640px) {
-  .bar { left: 12px; right: 12px; width: auto; margin: 0; justify-content: space-between; padding: 6px 6px 6px 8px; }
-  .links, .resume { display: none; }
-  .menu-btn {
-    display: block; padding: 10px 18px; border-radius: 999px;
-    background: var(--jade); color: #03130d; font-weight: 600; font-size: 15px;
-  }
+  .bar { max-width: calc(100vw - 24px); gap: 0; padding: 5px; }
+  .mark { width: 34px; height: 34px; margin-right: 0; }
+  .mark svg { width: 20px; height: 20px; }
+  .links { gap: 0; }
+  .link { padding: 9px 9px; font-size: 14px; }
+  .resume { margin-left: 2px; padding: 9px 12px; font-size: 14px; }
+}
+@media (max-width: 400px) {
+  .mark { display: none; }
+  .link { padding: 9px 7px; }
+  .resume { padding: 9px 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -114,7 +111,6 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- links + page transitions (the pond itself is unchanged) ---------- */
 .link { text-decoration: none; display: inline-block; }
-.sheet .link { display: block; }
 .bar { view-transition-name: bar; }
 @view-transition { navigation: auto; }
 ::view-transition-old(root) { animation: vt-out .3s ease both; }
