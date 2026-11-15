@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>About · Kolos Varga</title>
+  <meta name="description" content="Kolos Varga: why engineering, what I wonder about, and what I do outside of school." />
+  <meta name="theme-color" content="#050909" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050909'/%3E%3Cpath d='M32 10 A22 22 0 1 0 50 41 L32 32 Z' fill='%232fbf93'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+  <script>document.documentElement.classList.add('js');</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="bar" id="bar">
+    <a class="mark" href="../" aria-label="Kolos Varga, back to the pond">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 A12 12 0 1 0 26.4 22 L16 16 Z" /></svg>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a class="link" href="../projects/">Projects</a>
+      <a class="link" href="../about/" aria-current="page">About</a>
+      <a class="link" href="../hobbies/">Hobbies</a>
+      <a class="link" href="../contact/">Contact</a>
+    </nav>
+    <a class="resume" href="../resume/">Resume</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="sheet">Menu</button>
+  </header>
+  <div class="sheet" id="sheet" hidden>
+    <a class="link" href="../">Home</a>
+    <a class="link" href="../projects/">Projects</a>
+    <a class="link" href="../resume/">Resume</a>
+    <a class="link" href="../about/" aria-current="page">About</a>
+    <a class="link" href="../hobbies/">Hobbies</a>
+    <a class="link" href="../contact/">Contact</a>
+  </div>
+
+  <main id="main">
+    <section class="a-hero" aria-labelledby="hello-t">
+      <canvas id="wave" aria-hidden="true"></canvas>
+      <div class="a-hero-text">
+        <h1 class="display" id="hello-t" data-split>Hi, I'm Kolos.</h1>
+        <!-- EDIT: degree, school, and a sentence that sounds like you -->
+        <p class="lede" data-reveal>I study [biomedical engineering] at [University]. I like problems that are half physics, half biology, and need something built before anyone can answer them.</p>
+        <p class="note" data-reveal data-reveal-delay="0.15">The wave is made of keyboard symbols. Move through it.</p>
+      </div>
+    </section>
+
+    <section class="wrap hello" aria-label="Quick facts">
+      <figure class="fig" data-reveal>
+        <div class="plate">
+          <!-- EDIT: put your photo at assets/portrait.jpg (4:5). The placeholder hides itself once the photo loads. -->
+          <div class="ph note">[portrait]</div>
+          <img src="../assets/portrait.jpg" alt="Kolos Varga" onerror="this.remove()" />
+        </div>
+      </figure>
+      <dl class="facts" data-reveal data-reveal-delay="0.1">
+        <dt>studying</dt><dd>[B.S. Biomedical Engineering], [University], [class of 2028]</dd>
+        <dt>based in</dt><dd>[City], Oregon</dd>
+        <dt>looking for</dt><dd>[Summer 2027] internship in [medical devices, biomechanics, or lab research]</dd>
+        <dt>off the clock</dt><dd>Rowing, trumpet, piano</dd>
+      </dl>
+    </section>
+
+    <section class="wrap talk" aria-label="A conversation">
+      <div class="qa">
+        <h2 class="q" data-reveal><span class="note who">you might ask</span>So why engineering?</h2>
+        <div class="a" data-reveal data-reveal-delay="0.1">
+          <!-- EDIT: the real story. A moment, a person, an object you took apart. -->
+          <p class="said">[The moment you knew. One sentence, specific: a place, an object, a person.]</p>
+          <p>[Two or three sentences on what happened next, and why biomedical engineering in particular. What does it let you do that other fields don't?]</p>
+          <p>[One sentence on the kind of engineer you are trying to become.]</p>
+        </div>
+      </div>
+
+      <div class="qa flip">
+        <h2 class="q" data-reveal><span class="note who">you might ask</span>What do you wonder about?</h2>
+        <div class="a" data-reveal data-reveal-delay="0.1">
+          <p>Questions I keep coming back to, usually on the water or walking between classes:</p>
+          <!-- EDIT: your own questions. Real curiosity reads better than any list of skills. -->
+          <ul class="wonder">
+            <li><span class="sym" aria-hidden="true">~</span>[How does a muscle know how hard to pull?]</li>
+            <li><span class="sym" aria-hidden="true">@</span>[Why do some implants last decades and others fail in a year?]</li>
+            <li><span class="sym" aria-hidden="true">%</span>[What would it take to make a prosthetic hand you forget you are wearing?]</li>
+            <li><span class="sym" aria-hidden="true">&amp;</span>[A question that has nothing to do with school.]</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <h2 class="q" data-reveal><span class="note who">you might ask</span>And when you're not studying?</h2>
+        <div class="a" data-reveal data-reveal-delay="0.1">
+          <p class="said">Most mornings start on the water.</p>
+          <!-- EDIT: make these true and specific -->
+          <p>I row [for my university / with a club]. A boat only goes fast when everyone does the same small things right, thousands of times in a row. I try to bring that patience to engineering.</p>
+          <p>I also play trumpet and piano. Practice taught me to break hard things into small pieces, and playing in groups taught me to listen as much as I contribute.</p>
+          <p><a class="tlink" href="../hobbies/">More about the things I do for fun</a></p>
+        </div>
+      </div>
+
+      <div class="qa flip">
+        <h2 class="q" data-reveal><span class="note who">you might ask</span>Where are you headed?</h2>
+        <div class="a" data-reveal data-reveal-delay="0.1">
+          <!-- EDIT: be concrete about timing and field -->
+          <ul class="goals">
+            <li><span class="note">this summer</span><span>[An internship where I can build and test something real, in medical devices or biomechanics.]</span></li>
+            <li><span class="note">next few years</span><span>[Finish my degree, get deeper into a lab, maybe a minor in ___.]</span></li>
+            <li><span class="note">someday</span><span>[The problem you would most like to have worked on.]</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <a class="next" href="../hobbies/"><span class="note">Next room</span><span class="h2">Hobbies &amp; interests <span class="arrow" aria-hidden="true">→</span></span></a>
+      <footer class="foot">
+        <span>Kolos Varga</span>
+        <nav aria-label="Elsewhere">
+          <!-- EDIT: your email and profiles -->
+          <a href="mailto:you@example.com">Email</a>
+          <a href="https://www.linkedin.com/in/your-handle" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/your-handle" rel="noopener">GitHub</a>
+          <a href="../">Back to the pond</a>
+        </nav>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module" src="../js/about.js"></script>
+</body>
+</html>

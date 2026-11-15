@@ -1,0 +1,41 @@
+/* Hobbies: a smaller pixel pond, then the things themselves, set like pages of a field notebook. */
+
+.h-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px clamp(32px, 6vw, 96px); align-items: end; }
+.h-head .display { font-size: clamp(2.9rem, 8.4vw, 7.6rem); }
+.h-head .lede { margin: 0 0 0.6em; }
+@media (max-width: 860px) { .h-head { grid-template-columns: 1fr; } }
+
+.eco { margin-top: clamp(40px, 7vh, 72px); }
+.eco .scene { position: relative; height: clamp(300px, 58vh, 560px); cursor: pointer; touch-action: manipulation; }
+.eco canvas { width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; image-rendering: pixelated; }
+.eco .note { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; margin-top: 12px; }
+
+.entry { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px clamp(20px, 3vw, 40px); margin-top: clamp(100px, 17vh, 190px); align-items: start; }
+.entry .name { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(3rem, 9vw, 8rem); line-height: 0.9; letter-spacing: -0.02em; }
+.entry p { color: var(--ink-dim); }
+.entry .field { font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--ink-faint); border-left: 1px solid var(--rule); padding-left: 16px; }
+.entry .field b { font-weight: 400; color: var(--jade); }
+.e-row .name { grid-column: 1 / span 7; }
+.e-row .body { grid-column: 8 / span 5; padding-top: 1.2em; }
+.e-row .field { grid-column: 8 / span 5; }
+.e-music .name { grid-column: 4 / span 9; text-align: right; }
+.e-music .body { grid-column: 2 / span 5; grid-row: 2; }
+.e-music .field { grid-column: 8 / span 4; grid-row: 2; align-self: end; }
+.e-music .staff { grid-column: 1 / -1; grid-row: 3; height: 54px; }
+.e-other .name { grid-column: 1 / span 12; font-size: clamp(2.4rem, 6vw, 5rem); }
+.e-other .body { grid-column: 1 / span 6; }
+.e-other .field { grid-column: 8 / span 5; }
+@media (max-width: 860px) {
+  .entry > * { grid-column: 1 / -1 !important; grid-row: auto !important; text-align: left !important; padding-top: 0 !important; }
+}
+
+/* a staff of five lines; the notes on it sway when you pass */
+.staff svg { width: 100%; height: 100%; overflow: visible; }
+.staff line { stroke: var(--rule); stroke-width: 1; }
+.staff .nt { fill: var(--ink-dim); transition: transform .6s cubic-bezier(.2, .8, .2, 1), fill .3s; transform-box: fill-box; transform-origin: center; }
+
+.now { margin-top: clamp(100px, 17vh, 190px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px clamp(24px, 4vw, 56px); border-top: 1px solid var(--rule); padding-top: 28px; }
+.now h3 { margin-bottom: 10px; }
+.now ul { list-style: none; margin: 0; padding: 0; color: var(--ink-dim); }
+.now li + li { margin-top: 6px; }
+@media (max-width: 760px) { .now { grid-template-columns: 1fr; } }

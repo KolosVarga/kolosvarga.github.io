@@ -1,0 +1,173 @@
+/* Kolos Varga — the rooms beyond the pond.
+   Same water, same jade, same koi orange as the intro (css/style.css); flat colour only.
+   Hierarchy comes from Young Serif headlines, Instrument Sans text and DM Mono notes. */
+:root {
+  --bg: #050909;
+  --bg-2: #0a1413;
+  --ink: #d9ece5;
+  --ink-dim: rgba(217, 236, 229, 0.68);
+  --ink-faint: rgba(217, 236, 229, 0.4);
+  --rule: rgba(217, 236, 229, 0.14);
+  --jade: #2fbf93;
+  --jade-ink: #2fbf93;
+  --koi: #f28a36;
+  --gold: #f5c25e;
+  --lotus: #eef6f2;
+  --edge: rgba(150, 230, 200, 0.16);
+  --serif: "Young Serif", Georgia, serif;
+  --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "DM Mono", ui-monospace, "Cascadia Mono", Menlo, monospace;
+  --gutter: clamp(16px, 5vw, 72px);
+  --max: 1320px;
+  color-scheme: dark;
+}
+/* the resume is printed on cool paper; the bar stays pond-coloured */
+body.paper {
+  --bg: #e3ebe7;
+  --bg-2: #d6e1dc;
+  --ink: #0b1714;
+  --ink-dim: rgba(11, 23, 20, 0.72);
+  --ink-faint: rgba(11, 23, 20, 0.45);
+  --rule: rgba(11, 23, 20, 0.16);
+  --jade-ink: #10684e;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 17px/1.62 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg, canvas { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+a { color: inherit; }
+p { margin: 0 0 1em; }
+::selection { background: var(--jade); color: #03130d; }
+:focus-visible { outline: 2px solid var(--jade); outline-offset: 3px; border-radius: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: fixed; z-index: 50; left: 12px; top: -60px; padding: 10px 16px; border-radius: 999px; background: var(--jade); color: #03130d; font-weight: 600; text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* ---------- type ---------- */
+.display {
+  margin: 0; font-family: var(--serif); font-weight: 400;
+  font-size: clamp(3.1rem, 10vw, 8.6rem); line-height: 0.94; letter-spacing: -0.02em;
+}
+h2, .h2 { margin: 0 0 0.5em; font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.6vw, 3.7rem); line-height: 1.04; letter-spacing: -0.012em; }
+h3, .h3 { margin: 0 0 0.45em; font-family: var(--serif); font-weight: 400; font-size: 1.32rem; line-height: 1.2; }
+.lede { font-size: clamp(1.14rem, 1.7vw, 1.38rem); line-height: 1.5; color: var(--ink-dim); max-width: 36ch; }
+.note { font-family: var(--mono); font-size: 0.8rem; line-height: 1.5; color: var(--ink-faint); }
+.prose { max-width: 62ch; color: var(--ink-dim); }
+.prose strong { color: var(--ink); font-weight: 500; }
+.split .w { display: inline-block; white-space: nowrap; }
+.split .ch { display: inline-block; }
+
+/* links in running text: a jade underline that thickens on hover */
+.tlink {
+  color: var(--ink); text-decoration: underline; text-decoration-color: var(--jade-ink);
+  text-decoration-thickness: 1px; text-underline-offset: 0.22em;
+  transition: text-decoration-thickness .2s, text-underline-offset .2s, color .2s;
+}
+.tlink:hover { text-decoration-thickness: 3px; text-underline-offset: 0.16em; }
+
+/* ---------- layout ---------- */
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+main { display: block; }
+.page-top { padding-top: clamp(112px, 16vh, 168px); }
+
+/* ---------- the bar (same shape as the pond's, flat instead of frosted) ---------- */
+.bar {
+  position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); left: 0; right: 0;
+  width: fit-content; margin: 0 auto;
+  display: flex; align-items: center; gap: 4px; padding: 6px;
+  border-radius: 999px; background: #0a1413; border: 1px solid var(--edge);
+  color: #d9ece5; font-family: var(--sans);
+  view-transition-name: bar;
+}
+.mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; margin-right: 4px; }
+.mark svg { width: 24px; height: 24px; fill: #2fbf93; }
+.links { display: flex; gap: 2px; }
+.bar .link, .sheet .link {
+  position: relative; padding: 10px 16px; border-radius: 999px; text-decoration: none;
+  font-size: 15px; font-weight: 500; color: #d9ece5; transition: background-color .2s, color .2s;
+}
+.bar .link:hover, .bar .link:focus-visible { background: rgba(47, 191, 147, 0.12); color: #fff; }
+.bar .link[aria-current="page"] { color: #fff; background: rgba(47, 191, 147, 0.16); }
+.resume {
+  margin-left: 4px; padding: 10px 18px; border-radius: 999px; text-decoration: none;
+  background: #2fbf93; color: #03130d; font-size: 15px; font-weight: 600; transition: background-color .2s;
+}
+.resume:hover, .resume:focus-visible { background: #4fd8ab; }
+.resume[aria-current="page"] { background: #d9ece5; }
+.menu-btn { display: none; }
+.sheet {
+  position: fixed; z-index: 19; left: 12px; right: 12px; top: calc(max(14px, env(safe-area-inset-top)) + 64px);
+  display: flex; flex-direction: column; padding: 8px; border-radius: 22px;
+  background: #0a1413; border: 1px solid var(--edge); font-family: var(--sans);
+}
+.sheet[hidden] { display: none; }
+.sheet .link { font-size: 20px; padding: 14px 16px; border-radius: 14px; }
+.sheet .link[aria-current="page"] { color: #2fbf93; }
+@media (max-width: 640px) {
+  .bar { left: 12px; right: 12px; width: auto; margin: 0; justify-content: space-between; padding: 6px 6px 6px 8px; }
+  .links, .bar .resume { display: none; }
+  .menu-btn { display: block; padding: 10px 18px; border-radius: 999px; background: #2fbf93; color: #03130d; font-weight: 600; font-size: 15px; }
+}
+
+/* ---------- reveal on scroll (only hidden when the motion script is running) ---------- */
+.js [data-reveal] { opacity: 0; animation: reveal-failsafe 0s 2.5s forwards; }
+.js.motion [data-reveal] { animation: none; }
+.js.static [data-reveal] { opacity: 1; animation: none; }
+@keyframes reveal-failsafe { to { opacity: 1; } }
+
+/* ---------- next room + footer ---------- */
+.next {
+  display: block; margin-top: clamp(96px, 16vh, 180px); padding-block: clamp(40px, 7vh, 72px);
+  border-top: 1px solid var(--rule); text-decoration: none;
+}
+.next .note { display: block; margin-bottom: 10px; }
+.next .h2 { display: inline-flex; align-items: baseline; gap: 0.35em; margin: 0; transition: color .25s; }
+.next .arrow { display: inline-block; transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.next:hover .h2 { color: var(--jade-ink); }
+.next:hover .arrow { transform: translateX(0.3em); }
+.foot {
+  display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; align-items: baseline;
+  padding-block: 28px 40px; border-top: 1px solid var(--rule); color: var(--ink-faint); font-size: 14px;
+}
+.foot nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.foot a { color: var(--ink-dim); text-decoration: none; }
+.foot a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* ---------- figures: placeholders drawn like notebook sketches ---------- */
+.fig { margin: 0; }
+.fig .plate {
+  position: relative; background: var(--bg-2); border-radius: 6px; overflow: hidden;
+  aspect-ratio: var(--ratio, 16 / 9);
+}
+.fig .plate > img { width: 100%; height: 100%; object-fit: cover; }
+.fig .plate > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fig figcaption { margin-top: 10px; }
+.sketch { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.sketch .soft { stroke: var(--ink-faint); }
+.sketch .jade { stroke: var(--jade); }
+.sketch .koi { stroke: var(--koi); }
+.sketch .fillk { fill: var(--koi); stroke: none; }
+.sketch text { fill: var(--ink-dim); stroke: none; font-family: var(--mono); font-size: 13px; }
+.sketch .callout { opacity: 1; }
+
+/* ---------- view transitions between rooms ---------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .3s ease both; }
+::view-transition-new(root) { animation: vt-in .55s ease both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
