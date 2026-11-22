@@ -25,7 +25,6 @@
     <nav class="links" aria-label="Primary">
       <a class="link" href="../">Home</a>
       <a class="link" href="../projects/" aria-current="page">Projects</a>
-      <a class="link" href="../hobbies/">Hobbies</a>
       <a class="link" href="../contact/">Contact</a>
       <a class="link" href="../resume/">Resume</a>
     </nav>
@@ -45,19 +44,12 @@
     </section>
 
     <!-- EDIT: keep these titles in sync with the stories below -->
-    <nav class="wrap p-index" aria-label="Projects on this page" data-reveal>
-      <ol>
-        <li><a href="#p1"><span class="n">01</span><span class="t">[Project title]</span><span class="k">[Biomedical device]</span><span class="y">[2026]</span></a></li>
-        <li><a href="#p2"><span class="n">02</span><span class="t">[Project title]</span><span class="k">[Mechanism design]</span><span class="y">[2025]</span></a></li>
-        <li><a href="#p3"><span class="n">03</span><span class="t">[Project title]</span><span class="k">[Lab or team project]</span><span class="y">[2025]</span></a></li>
-        <li><a href="#more"><span class="n">+</span><span class="t">Smaller things</span><span class="k">Weekend builds and class work</span><span class="y"></span></a></li>
-      </ol>
-    </nav>
-
-    <!-- ============ 01: the lead story ============
-         EDIT: your strongest project. Replace the sketch with a photo:
-         <div class="plate"><img src="../assets/projects/p1.jpg" alt="Describe the photo" /></div> -->
-    <article class="story s-lead wrap" id="p1" aria-labelledby="p1-t">
+    <section class="wrap p-index" aria-label="Explore the projects">
+      <p class="note p-directions">Open a project to look inside. Select it again to close.</p>
+      <details class="project-panel" id="p1">
+        <summary><span class="n">01</span><span class="t">[Project title]</span><span class="k">[Biomedical device]</span><span class="y">[2026]</span><span class="p-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+    <article class="story s-lead" id="p1-story" aria-labelledby="p1-t">
       <header class="s-head" data-reveal>
         <span class="s-num" aria-hidden="true">01</span>
         <div>
@@ -120,9 +112,12 @@
       <!-- EDIT: link real write-ups and code, or delete these -->
       <p class="s-links" data-reveal><a class="tlink" href="#">[Write-up]</a><a class="tlink" href="#">[Code]</a></p>
     </article>
-
-    <!-- ============ 02: a split ============ -->
-    <article class="story s-split wrap" id="p2" aria-labelledby="p2-t">
+        </div>
+      </details>
+      <details class="project-panel" id="p2">
+        <summary><span class="n">02</span><span class="t">[Project title]</span><span class="k">[Mechanism design]</span><span class="y">[2025]</span><span class="p-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+    <article class="story s-split" id="p2-story" aria-labelledby="p2-t">
       <div class="s-aside" data-reveal>
         <span class="s-num" aria-hidden="true">02</span>
         <h2 id="p2-t">[Project title]</h2>
@@ -174,9 +169,12 @@
         </section>
       </div>
     </article>
-
-    <!-- ============ 03: a process strip ============ -->
-    <article class="story s-strip wrap" id="p3" aria-labelledby="p3-t">
+        </div>
+      </details>
+      <details class="project-panel" id="p3">
+        <summary><span class="n">03</span><span class="t">[Project title]</span><span class="k">[Lab or team project]</span><span class="y">[2025]</span><span class="p-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+    <article class="story s-strip" id="p3-story" aria-labelledby="p3-t">
       <div class="intro" data-reveal>
         <div>
           <h2 id="p3-t">[Project title]</h2>
@@ -207,9 +205,12 @@
         <section data-reveal data-reveal-delay="0.16"><h3>What happened</h3><p>[The outcome, and what you took from it.]</p><p class="tools note">Built with <b>[tools]</b></p></section>
       </div>
     </article>
-
-    <!-- ============ smaller things ============ -->
-    <section class="ledger wrap" id="more" aria-labelledby="more-t">
+        </div>
+      </details>
+      <details class="project-panel" id="more">
+        <summary><span class="n">+</span><span class="t">Smaller things</span><span class="k">Weekend builds and class work</span><span class="y"></span><span class="p-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+    <section class="ledger" id="more-story" aria-labelledby="more-t">
       <div data-reveal>
         <h2 id="more-t">Smaller things</h2>
         <p class="prose">Weekend builds, class assignments I kept tinkering with, and things that did not need a whole page.</p>
@@ -221,6 +222,10 @@
         <li><b>[Project name]</b><span>[One sentence on what it is.]</span><i>[2024]</i></li>
       </ul>
     </section>
+        </div>
+      </details>
+    </section>
+
 
     <div class="wrap">
       <footer class="foot">
