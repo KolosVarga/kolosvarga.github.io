@@ -36,7 +36,7 @@ a { color: inherit; text-decoration: none; }
   image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
-.pond { cursor: crosshair; }
+.pond { cursor: default; }
 /* the name floats above the pond: above the water, the koi and the lily pads */
 .title {
   position: absolute; z-index: 3; left: 0; right: 0; top: 40%;
