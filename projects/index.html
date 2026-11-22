@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Projects · Kolos Varga</title>
+  <meta name="description" content="Engineering projects by Kolos Varga: what each was for, what made it hard, how it was built, and what happened." />
+  <meta name="theme-color" content="#050909" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050909'/%3E%3Cpath d='M32 10 A22 22 0 1 0 50 41 L32 32 Z' fill='%232fbf93'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" href="../css/projects.css" />
+  <script>document.documentElement.classList.add('js');</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="bar" id="bar">
+    <a class="mark" href="../" aria-label="Kolos Varga, back to the pond">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 A12 12 0 1 0 26.4 22 L16 16 Z" /></svg>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a class="link" href="../">Home</a>
+      <a class="link" href="../projects/" aria-current="page">Projects</a>
+      <a class="link" href="../hobbies/">Hobbies</a>
+      <a class="link" href="../contact/">Contact</a>
+      <a class="link" href="../resume/">Resume</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="p-space" id="space" aria-labelledby="p-title">
+      <canvas aria-hidden="true"></canvas>
+      <h1 class="p-title" id="p-title" data-split>Projects</h1>
+      <p class="sr-only">A pixel-art space scene: human and alien spacecraft fly between planets. You can grab a ship and throw it.</p>
+      <p class="p-hint" id="space-hint" aria-hidden="true"><span class="hint-mouse">Grab a ship and throw it</span><span class="hint-touch">Grab a ship and fling it</span></p>
+    </section>
+
+    <section class="wrap p-intro">
+      <!-- EDIT: one or two sentences in your own voice -->
+      <p class="lede" data-reveal>Things I have designed, built, tested and rebuilt. Each one is written up the way I would explain it at a lab bench: why it existed, what made it hard, how it came together, and what happened.</p>
+    </section>
+
+    <!-- EDIT: keep these titles in sync with the stories below -->
+    <nav class="wrap p-index" aria-label="Projects on this page" data-reveal>
+      <ol>
+        <li><a href="#p1"><span class="n">01</span><span class="t">[Project title]</span><span class="k">[Biomedical device]</span><span class="y">[2026]</span></a></li>
+        <li><a href="#p2"><span class="n">02</span><span class="t">[Project title]</span><span class="k">[Mechanism design]</span><span class="y">[2025]</span></a></li>
+        <li><a href="#p3"><span class="n">03</span><span class="t">[Project title]</span><span class="k">[Lab or team project]</span><span class="y">[2025]</span></a></li>
+        <li><a href="#more"><span class="n">+</span><span class="t">Smaller things</span><span class="k">Weekend builds and class work</span><span class="y"></span></a></li>
+      </ol>
+    </nav>
+
+    <!-- ============ 01: the lead story ============
+         EDIT: your strongest project. Replace the sketch with a photo:
+         <div class="plate"><img src="../assets/projects/p1.jpg" alt="Describe the photo" /></div> -->
+    <article class="story s-lead wrap" id="p1" aria-labelledby="p1-t">
+      <header class="s-head" data-reveal>
+        <span class="s-num" aria-hidden="true">01</span>
+        <div>
+          <h2 id="p1-t">[Project title, said plainly]</h2>
+          <p class="note meta">[2026] · [Course, lab or team] · [Your role]</p>
+        </div>
+      </header>
+
+      <figure class="fig" data-reveal data-sketch>
+        <div class="plate">
+          <svg class="sketch" viewBox="0 0 1050 450" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Placeholder sketch: three electrodes wired to a small board, and the signal it records">
+            <g class="soft">
+              <path class="draw" d="M120 120 H1000" stroke-dasharray="2 6" />
+            </g>
+            <circle class="draw" cx="185" cy="170" r="14" /><circle class="draw" cx="185" cy="225" r="14" /><circle class="draw" cx="185" cy="280" r="14" />
+            <path class="draw" d="M199 170 C 250 170, 260 195, 300 200" />
+            <path class="draw" d="M199 225 H 300" />
+            <path class="draw" d="M199 280 C 250 280, 260 255, 300 250" />
+            <rect class="draw" x="300" y="150" width="260" height="150" rx="14" />
+            <rect class="draw jade" x="380" y="190" width="70" height="70" rx="4" />
+            <path class="draw soft" d="M395 190 V176 M415 190 V176 M435 190 V176 M395 260 V274 M415 260 V274 M435 260 V274" />
+            <path class="draw" d="M560 225 H 630" />
+            <path class="draw koi" d="M640 223.6 L645 226.2 L650 225.3 L655 221.5 L660 221.3 L665 221.4 L670 224.6 L675 221.8 L680 226.6 L685 225.4 L690 227.6 L695 227.1 L700 220.2 L705 225.7 L710 223.2 L715 224.5 L720 218.0 L725 215.1 L730 224.4 L735 226.5 L740 216.1 L745 237.6 L750 227.5 L755 252.1 L760 209.3 L765 193.2 L770 251.1 L775 221.0 L780 241.9 L785 236.6 L790 202.8 L795 239.7 L800 219.5 L805 289.5 L810 247.0 L815 247.7 L820 286.7 L825 203.0 L830 241.6 L835 217.6 L840 190.8 L845 240.7 L850 206.6 L855 243.3 L860 219.5 L865 238.7 L870 237.6 L875 221.4 L880 230.4 L885 224.2 L890 219.8 L895 222.8 L900 224.5 L905 220.7 L910 224.1 L915 229.0 L920 225.3 L925 226.1 L930 228.3 L935 228.1 L940 224.1 L945 221.8 L950 221.5 L955 222.7 L960 223.7 L965 221.0 L970 221.8 L975 221.2 L980 225.9" />
+            <!-- dimension line under the board -->
+            <path class="draw soft" d="M300 330 V350 M560 330 V350 M300 340 H560" />
+            <text class="label" x="430" y="372" text-anchor="middle">[board size]</text>
+            <!-- callouts -->
+            <path class="draw soft" d="M171 160 L120 95 H60" /><text class="label" x="60" y="85">[electrodes]</text>
+            <path class="draw soft" d="M450 190 L500 95 H600" /><text class="label" x="510" y="85">[amplifier + filter]</text>
+            <path class="draw soft" d="M805 290 L840 370 H960" /><text class="label" x="850" y="392">[what the signal showed]</text>
+          </svg>
+        </div>
+        <figcaption class="note">Fig. 1 · [What the photo shows, in one line]</figcaption>
+      </figure>
+
+      <div class="s-body">
+        <section class="b-why" data-reveal>
+          <h3>Why it exists</h3>
+          <p>[Who needed this, and what was wrong with what they had? Two or three sentences. Name the person or situation if you can.]</p>
+        </section>
+        <section class="b-hard" data-reveal data-reveal-delay="0.1">
+          <h3>The hard part</h3>
+          <p>[The engineering problem in one sentence: a constraint, a tradeoff, or a number you had to hit. Then one sentence on why it was hard.]</p>
+        </section>
+        <section class="b-how" data-reveal>
+          <h3>How it came together</h3>
+          <ol class="steps">
+            <li>[First approach, and what you learned from it.]</li>
+            <li>[What you changed, and why.]</li>
+            <li>[How you tested it: on what, with whom, against what standard.]</li>
+          </ol>
+        </section>
+        <section class="b-out" data-reveal data-reveal-delay="0.1">
+          <h3>What happened</h3>
+          <p class="pull">[The result in one sentence. Use a real number only if you measured it.]</p>
+          <p>[What you would do next, or what you would do differently.]</p>
+        </section>
+      </div>
+      <p class="tools note" data-reveal>Built with <b>[SolidWorks, Arduino, MATLAB]</b></p>
+      <!-- EDIT: link real write-ups and code, or delete these -->
+      <p class="s-links" data-reveal><a class="tlink" href="#">[Write-up]</a><a class="tlink" href="#">[Code]</a></p>
+    </article>
+
+    <!-- ============ 02: a split ============ -->
+    <article class="story s-split wrap" id="p2" aria-labelledby="p2-t">
+      <div class="s-aside" data-reveal>
+        <span class="s-num" aria-hidden="true">02</span>
+        <h2 id="p2-t">[Project title]</h2>
+        <p class="note meta">[2025] · [Course, lab or team] · [Your role]</p>
+        <p class="first">[Why it exists. What problem did it answer, and for whom?]</p>
+        <p class="tools note">Built with <b>[Fusion 360, 3D printing, Python]</b></p>
+      </div>
+      <div class="s-main">
+        <figure class="fig" data-reveal data-sketch>
+          <div class="plate">
+            <svg class="sketch" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Placeholder sketch: a three-segment finger mechanism with a tendon routed along it">
+              <g class="soft"><path class="draw" d="M60 470 H740" stroke-dasharray="2 6" /></g>
+              <rect class="draw" x="110" y="400" width="150" height="70" rx="10" />
+              <path class="draw soft" d="M130 420 H240 M130 450 H240" />
+              <path class="draw" d="M260 435 L 420 350" stroke-width="2" />
+              <path class="draw" d="M420 350 L 540 250" stroke-width="2" />
+              <path class="draw" d="M540 250 L 610 175" stroke-width="2" />
+              <path class="draw" d="M252 418 L412 333 M268 452 L428 367" />
+              <path class="draw" d="M408 337 L528 237 M432 363 L552 263" />
+              <path class="draw" d="M530 241 L598 168 M550 259 L620 184" />
+              <circle class="draw jade" cx="420" cy="350" r="12" /><circle class="draw jade" cx="540" cy="250" r="11" /><circle class="draw jade" cx="610" cy="175" r="9" />
+              <path class="draw koi" d="M240 470 C 330 440, 400 400, 440 372 S 540 290, 560 268 S 615 205, 625 190" stroke-dasharray="7 6" />
+              <path class="draw soft" d="M540 250 m 60 0 A 60 60 0 0 0 585 210" />
+              <!-- callouts -->
+              <path class="draw soft" d="M420 338 L 380 220 H 290" /><text class="label" x="290" y="208">[joint]</text>
+              <path class="draw soft" d="M600 225 L 690 225" /><text class="label" x="640" y="214">[range]</text>
+              <path class="draw soft" d="M470 385 L 520 500 H 640" /><text class="label" x="540" y="522">[tendon route]</text>
+              <path class="draw soft" d="M185 470 V 520 H 120" /><text class="label" x="120" y="542">[actuator]</text>
+            </svg>
+          </div>
+          <figcaption class="note">Fig. 2 · [What the photo shows]</figcaption>
+        </figure>
+        <section data-reveal>
+          <h3>The hard part</h3>
+          <p>[The constraint that shaped everything. Size, force, cost, safety, a deadline.]</p>
+        </section>
+        <section data-reveal>
+          <h3>How it came together</h3>
+          <ol class="notebook">
+            <li><span class="note">week [1–2]</span>[Sketches and a first model.]</li>
+            <li><span class="note">week [3–5]</span>[Prototype, and what broke.]</li>
+            <li><span class="note">week [6–8]</span>[The fix, and the final test.]</li>
+          </ol>
+        </section>
+        <section data-reveal>
+          <h3>What happened</h3>
+          <p class="pull">[One sentence of outcome.]</p>
+          <p class="s-links"><a class="tlink" href="#">[Write-up]</a></p>
+        </section>
+      </div>
+    </article>
+
+    <!-- ============ 03: a process strip ============ -->
+    <article class="story s-strip wrap" id="p3" aria-labelledby="p3-t">
+      <div class="intro" data-reveal>
+        <div>
+          <h2 id="p3-t">[Project title]</h2>
+          <p class="note meta">03 · [2025] · [Course, lab or team] · [Your role]</p>
+        </div>
+        <p>[One paragraph: what this was, start to finish. This layout suits a project whose story is the process, like a lab protocol or a design course.]</p>
+      </div>
+      <div class="strip-wrap" data-reveal data-sketch>
+        <svg class="join sketch" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path class="draw jade" d="M60 40 C 200 10, 300 90, 400 60 S 640 20, 700 70 S 900 40, 960 60" /></svg>
+        <ol class="strip">
+        <li><figure class="fig"><div class="plate"><svg class="sketch" viewBox="0 0 240 180" aria-hidden="true">
+          <path class="draw soft" d="M40 130 C 70 60, 110 150, 140 80 S 190 70, 200 110" /><path class="draw" d="M50 50 L 95 42 L 100 90 L 56 96 Z" /><path class="draw soft" d="M150 40 l 30 0 m -30 8 l 22 0" />
+        </svg></div><figcaption class="note"><b>Sketch</b>[What you drew first]</figcaption></figure></li>
+        <li><figure class="fig"><div class="plate"><svg class="sketch" viewBox="0 0 240 180" aria-hidden="true">
+          <path class="draw" d="M120 40 L 180 70 L 120 100 L 60 70 Z" /><path class="draw" d="M60 70 V 125 L 120 155 L 180 125 V 70 M120 100 V 155" /><path class="draw jade" d="M90 85 L 150 55" stroke-dasharray="3 4" />
+        </svg></div><figcaption class="note"><b>Model</b>[CAD, simulation or math]</figcaption></figure></li>
+        <li><figure class="fig"><div class="plate"><svg class="sketch" viewBox="0 0 240 180" aria-hidden="true">
+          <rect class="draw" x="60" y="55" width="120" height="80" rx="8" /><circle class="draw" cx="75" cy="70" r="4" /><circle class="draw" cx="165" cy="70" r="4" /><circle class="draw" cx="75" cy="120" r="4" /><circle class="draw" cx="165" cy="120" r="4" /><path class="draw koi" d="M180 100 C 205 100, 200 140, 225 140" />
+        </svg></div><figcaption class="note"><b>Build</b>[The first physical version]</figcaption></figure></li>
+        <li><figure class="fig"><div class="plate"><svg class="sketch" viewBox="0 0 240 180" aria-hidden="true">
+          <path class="draw soft" d="M40 30 V 145 H 210" /><path class="draw jade" d="M45 135 C 90 130, 110 70, 205 50" /><circle class="draw" cx="70" cy="128" r="3" /><circle class="draw" cx="105" cy="102" r="3" /><circle class="draw" cx="140" cy="72" r="3" /><circle class="draw" cx="180" cy="60" r="3" />
+        </svg></div><figcaption class="note"><b>Test</b>[What you measured]</figcaption></figure></li>
+        </ol>
+      </div>
+      <div class="cols">
+        <section data-reveal><h3>Why it exists</h3><p>[The purpose, in two sentences.]</p></section>
+        <section data-reveal data-reveal-delay="0.08"><h3>The hard part</h3><p>[The challenge, in two sentences.]</p></section>
+        <section data-reveal data-reveal-delay="0.16"><h3>What happened</h3><p>[The outcome, and what you took from it.]</p><p class="tools note">Built with <b>[tools]</b></p></section>
+      </div>
+    </article>
+
+    <!-- ============ smaller things ============ -->
+    <section class="ledger wrap" id="more" aria-labelledby="more-t">
+      <div data-reveal>
+        <h2 id="more-t">Smaller things</h2>
+        <p class="prose">Weekend builds, class assignments I kept tinkering with, and things that did not need a whole page.</p>
+      </div>
+      <ul data-reveal>
+        <li><b>[Project name]</b><span>[One sentence on what it is.]</span><i>[2025]</i></li>
+        <li><b>[Project name]</b><span>[One sentence on what it is.]</span><i>[2025]</i></li>
+        <li><b>[Project name]</b><span>[One sentence on what it is.]</span><i>[2024]</i></li>
+        <li><b>[Project name]</b><span>[One sentence on what it is.]</span><i>[2024]</i></li>
+      </ul>
+    </section>
+
+    <div class="wrap">
+      <footer class="foot">
+        <span>Kolos Varga</span>
+        <nav aria-label="Elsewhere">
+          <!-- EDIT: your email and profiles -->
+          <a href="mailto:you@example.com">Email</a>
+          <a href="https://www.linkedin.com/in/your-handle" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/your-handle" rel="noopener">GitHub</a>
+          <a href="../">Back to the pond</a>
+        </nav>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module" src="../js/projects.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kolos Varga</title>
+  <meta name="description" content="Kolos Varga, engineering student. Projects, experience, and resume." />
+  <meta property="og:title" content="Kolos Varga" />
+  <meta property="og:description" content="Engineering student. Projects, experience, and resume." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#050909" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050909'/%3E%3Cpath d='M32 10 A22 22 0 1 0 50 41 L32 32 Z' fill='%232fbf93'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <!-- GSAP drives the UI motion; Lenis smooths scrolling on the other pages -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body>
+  <header class="bar" id="bar">
+    <a class="mark" href="#top" aria-label="Kolos Varga, back to the top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 A12 12 0 1 0 26.4 22 L16 16 Z" /></svg>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a class="link" href="#top" aria-current="page">Home</a>
+      <a class="link" href="projects/">Projects</a>
+      <a class="link" href="hobbies/">Hobbies</a>
+      <a class="link" href="contact/">Contact</a>
+      <a class="link" href="resume/">Resume</a>
+    </nav>
+  </header>
+
+  <main id="main">
+  <section class="pond" id="top">
+    <h1 class="title" id="title" aria-label="Kolos Varga">Kolos Varga</h1>
+    <p class="subtitle" id="subtitle">Engineer</p>
+    <p class="sr-only">Engineering student, rower, and musician. An illustrated koi pond: click the water to make ripples.</p>
+    <canvas id="water" aria-hidden="true"></canvas>
+    <canvas id="surface" aria-hidden="true"></canvas>
+    <canvas id="pads" aria-hidden="true"></canvas>
+    <p class="hint" id="hint"><span class="hint-mouse">Click the water</span><span class="hint-touch">Tap the water</span></p>
+  </section>
+
+  <!-- ============ about ============
+       EDIT: everything in [brackets]. Keep it short; the Projects and Resume pages carry the detail. -->
+  <section class="h-about" id="about" aria-labelledby="about-t">
+    <div class="h-wrap">
+      <h2 class="h-label" id="about-t" data-in>About</h2>
+      <p class="h-lead" data-in>I study [biomedical engineering] at [University]. I like problems that are half physics, half biology, and need something built before anyone can answer them.</p>
+
+      <div class="h-grid">
+        <figure class="h-photo" data-in>
+          <!-- EDIT: put your photo at assets/portrait.jpg (4:5). The placeholder hides once it loads. -->
+          <span class="h-ph">[portrait]</span>
+          <img src="assets/portrait.jpg" alt="Kolos Varga" loading="lazy" onerror="this.remove()" />
+        </figure>
+
+        <div class="h-body">
+          <dl class="h-facts" data-in>
+            <div><dt>Studying</dt><dd>[B.S. Biomedical Engineering], [University], [class of 2028]</dd></div>
+            <div><dt>Based in</dt><dd>[City], Oregon</dd></div>
+            <div><dt>Looking for</dt><dd>[Summer 2027] internship in [medical devices, biomechanics, or lab research]</dd></div>
+            <div><dt>Off the clock</dt><dd>Rowing, trumpet, piano</dd></div>
+          </dl>
+
+          <p class="h-said" data-in>Most mornings start on the water.</p>
+          <!-- EDIT: make this true and specific -->
+          <p class="h-text" data-in>A rowing boat only goes fast when everyone does the same small things right, thousands of times in a row. I try to bring that patience to engineering. Trumpet and piano taught me the rest: break hard things into small pieces, and listen as much as you play.</p>
+
+          <!-- EDIT: your own questions. Tap the line to see the next one. -->
+          <button class="h-wonder" type="button" data-in aria-describedby="wonder-help">
+            <span class="h-wonder-k">Currently wondering</span>
+            <span class="h-wonder-q" aria-live="polite">[How does a muscle know how hard to pull?]</span>
+          </button>
+          <span class="sr-only" id="wonder-help">Shows the next question</span>
+          <template id="wonders">
+            <span>[How does a muscle know how hard to pull?]</span>
+            <span>[Why do some implants last decades and others fail in a year?]</span>
+            <span>[What would it take to make a prosthetic hand you forget you are wearing?]</span>
+            <span>[A question that has nothing to do with school.]</span>
+          </template>
+
+          <!-- What I've been listening to, live from Last.fm (Spotify can scrobble to it: last.fm/settings/applications).
+               EDIT: put your Last.fm username in data-lastfm-user and a free API key (last.fm/api/account/create) in data-lastfm-key.
+               Until then it shows the bracketed placeholders below. -->
+          <div class="h-listen" id="listening" data-in data-lastfm-user="" data-lastfm-key="">
+            <div class="h-rec" aria-hidden="true">
+              <svg class="h-disc" viewBox="0 0 100 100">
+                <defs><clipPath id="label-clip"><circle cx="50" cy="50" r="17" /></clipPath></defs>
+                <circle cx="50" cy="50" r="49" fill="#0b1110" />
+                <circle cx="50" cy="50" r="44" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <circle cx="50" cy="50" r="38" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <circle cx="50" cy="50" r="32" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <circle cx="50" cy="50" r="26" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <path d="M50 4 A46 46 0 0 1 90 28" fill="none" stroke="#2c3b38" stroke-width="1.6" stroke-linecap="round" />
+                <circle cx="50" cy="50" r="17" fill="#2fbf93" />
+                <image class="h-art" clip-path="url(#label-clip)" x="33" y="33" width="34" height="34" href="" preserveAspectRatio="xMidYMid slice" />
+                <circle cx="50" cy="50" r="2" fill="#050909" />
+              </svg>
+              <svg class="h-arm" viewBox="0 0 40 80"><circle cx="30" cy="8" r="5" fill="#2a3633" /><path d="M30 8 L26 58 L18 70" fill="none" stroke="#9fb3ac" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /><rect x="13" y="67" width="9" height="6" rx="1.5" fill="#d9ece5" transform="rotate(30 17 70)" /></svg>
+            </div>
+            <div class="h-listen-body">
+              <p class="h-listen-k"><span class="h-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="h-listen-state">On repeat lately</span></p>
+              <p class="h-now"><a class="h-song" href="https://www.last.fm/" rel="noopener">[Song title]</a><span class="h-artist">[Artist]</span></p>
+              <ol class="h-recent" aria-label="Played before that">
+                <li><span class="t">[Song]</span><span class="a">[Artist]</span></li>
+                <li><span class="t">[Song]</span><span class="a">[Artist]</span></li>
+                <li><span class="t">[Song]</span><span class="a">[Artist]</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ bottom of the page ============
+       EDIT: swap each placeholder link for yours. -->
+  <footer class="h-foot" aria-labelledby="find-t">
+    <div class="h-wrap">
+      <h2 class="h-foot-t" id="find-t" data-in>Find me</h2>
+      <ul class="h-links">
+        <li data-in><a href="resume/">Resume</a></li>
+        <li data-in><a href="https://github.com/your-handle" rel="noopener">GitHub</a></li>
+        <li data-in><a href="https://www.linkedin.com/in/your-handle" rel="noopener">LinkedIn</a></li>
+        <li data-in><a href="mailto:you@example.com">Email</a></li>
+        <li data-in><a href="https://www.instagram.com/your-handle" rel="noopener">Instagram</a></li>
+      </ul>
+      <div class="h-base">
+        <span>Kolos Varga</span>
+        <a href="#top" class="h-up">Back to the pond <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
+  </main>
+
+  <script type="module" src="js/pond.js"></script>
+  <script type="module" src="js/home-nav.js"></script>
+  <script type="module" src="js/home.js"></script>
+  <script type="module" src="js/listening.js"></script>
+</body>
+</html>

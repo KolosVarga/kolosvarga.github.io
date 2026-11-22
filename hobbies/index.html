@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Hobbies &amp; interests · Kolos Varga</title>
+  <meta name="description" content="Rowing, trumpet, piano and the other things Kolos Varga does when the laptop is closed." />
+  <meta name="theme-color" content="#050909" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050909'/%3E%3Cpath d='M32 10 A22 22 0 1 0 50 41 L32 32 Z' fill='%232fbf93'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" href="../css/hobbies.css" />
+  <script>document.documentElement.classList.add('js');</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="bar" id="bar">
+    <a class="mark" href="../" aria-label="Kolos Varga, back to the pond">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 A12 12 0 1 0 26.4 22 L16 16 Z" /></svg>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a class="link" href="../">Home</a>
+      <a class="link" href="../projects/">Projects</a>
+      <a class="link" href="../hobbies/" aria-current="page">Hobbies</a>
+      <a class="link" href="../contact/">Contact</a>
+      <a class="link" href="../resume/">Resume</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="wrap page-top">
+      <div class="h-head">
+        <h1 class="display" data-split>Hobbies &amp; interests</h1>
+        <p class="lede" data-reveal>What I do when the laptop is closed. Most of it involves water, or making noise.</p>
+      </div>
+    </section>
+
+    <section class="eco" id="eco-wrap" aria-label="A small animated pond">
+      <div class="scene" id="eco">
+        <canvas aria-hidden="true"></canvas>
+      </div>
+      <p class="note wrap"><span>A smaller pond than the one at the front door.</span><span>Tap a lily pad and a frog will hop over.</span></p>
+    </section>
+
+    <!-- EDIT: make every line here true and specific; small real details beat big claims -->
+    <article class="wrap entry e-row" aria-labelledby="h-row">
+      <h2 class="name" id="h-row" data-reveal>Rowing</h2>
+      <div class="body" data-reveal data-reveal-delay="0.1">
+        <p>Most mornings start on the water. I row [for my university / with a club], usually in [an eight / a four / a single].</p>
+        <p>Rowing is a sport of tiny repeated corrections: catch timing, blade depth, where your weight is at the finish. It is the closest thing I know to debugging with your whole body.</p>
+      </div>
+      <p class="field" data-reveal data-reveal-delay="0.2"><b>seat</b> [stroke / 4 / bow]<br /><b>favourite piece</b> [e.g. a 2k on a flat morning]<br /><b>what it taught me</b> [one honest line]</p>
+    </article>
+
+    <article class="wrap entry e-music" aria-labelledby="h-music">
+      <h2 class="name" id="h-music" data-reveal>Trumpet &amp; piano</h2>
+      <div class="body" data-reveal>
+        <p>Trumpet since [age or year], piano since [age or year]. Practice taught me to break hard things into small pieces. Playing in groups taught me to listen as much as I contribute.</p>
+        <p>[What you play now: an ensemble, a band, or just late at night.]</p>
+      </div>
+      <p class="field" data-reveal data-reveal-delay="0.1"><b>playing lately</b> [a piece or tune]<br /><b>listening to</b> [an artist or album]</p>
+      <div class="staff" id="staff" aria-hidden="true" data-reveal></div>
+    </article>
+
+    <article class="wrap entry e-other" aria-labelledby="h-other">
+      <h2 class="name" id="h-other" data-reveal>[Another thing you love]</h2>
+      <div class="body" data-reveal><p>[Hiking in Oregon, cooking, photography, building keyboards, a game you are weirdly good at. Two or three sentences, and say why you like it.]</p></div>
+      <p class="field" data-reveal data-reveal-delay="0.1"><b>how often</b> [weekly / whenever it rains / every summer]</p>
+    </article>
+
+    <section class="wrap now" aria-label="Lately" data-reveal>
+      <div><h3>Reading</h3><ul><li>[Book title], [author]</li><li>[Book title], [author]</li></ul></div>
+      <div><h3>Learning</h3><ul><li>[A skill or tool]</li><li>[A course or topic]</li></ul></div>
+      <div><h3>Tinkering with</h3><ul><li>[A side project]</li><li>[Something you are fixing]</li></ul></div>
+    </section>
+
+    <div class="wrap">
+      <a class="next" href="../contact/"><span class="note">Next room</span><span class="h2">Say hello <span class="arrow" aria-hidden="true">→</span></span></a>
+      <footer class="foot">
+        <span>Kolos Varga</span>
+        <nav aria-label="Elsewhere">
+          <!-- EDIT: your email and profiles -->
+          <a href="mailto:you@example.com">Email</a>
+          <a href="https://www.linkedin.com/in/your-handle" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/your-handle" rel="noopener">GitHub</a>
+          <a href="../">Back to the pond</a>
+        </nav>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module" src="../js/hobbies.js"></script>
+</body>
+</html>
