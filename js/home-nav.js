@@ -1,7 +1,5 @@
-/* On the pond, a nav link first taps the water (pond.js sends a ripple and calls the koi),
-   then we follow the link a moment later so the visitor sees the fish turn toward it.
-   "About" (and the mark / "Back to the pond") scroll within the page instead.
-   Modified clicks (new tab etc.) and reduced motion go straight through. */
+/* On the pond, links to places on this page (Home, the mark, "Back to the pond") scroll smoothly
+   instead of jumping. Links to other pages are left to the browser. */
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const barH = () => (document.getElementById('bar')?.getBoundingClientRect().bottom || 70) + 12;
 
@@ -19,14 +17,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (scrollToHash(a.getAttribute('href'))) e.preventDefault();
-  });
-});
-
-document.querySelectorAll('.bar a.link:not([href^="#"]), .bar a.resume').forEach(a => {
-  a.addEventListener('click', e => {
-    if (reduce || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    setTimeout(() => { window.location.href = a.href; }, 520);
   });
 });
 

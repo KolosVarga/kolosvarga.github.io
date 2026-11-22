@@ -60,7 +60,7 @@
 
 @media print {
   body.paper { --bg: #fff; --ink: #000; background: #fff; font-size: 11pt; }
-  .bar, .sheet, .skip, .ruler, .caliper, .next, .foot, .r-actions { display: none !important; }
+  .bar, .skip, .ruler, .caliper, .next, .foot, .r-actions { display: none !important; }
   .page-top { padding-top: 0; }
   .r-grid { grid-template-columns: 1fr 3fr; margin-top: 16px; }
   .rail { position: static; }

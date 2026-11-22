@@ -1,4 +1,4 @@
-/* Shared by every room except the pond: menu, magnetic bar, Lenis, headline split, scroll reveals,
+/* Shared by every room except the pond: magnetic bar, Lenis, headline split, scroll reveals,
    and a helper that only runs a canvas loop while it is on screen. */
 export const gsap = window.gsap || null;
 export const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -8,33 +8,14 @@ export const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const root = document.documentElement;
 root.classList.add(gsap && !reduceMotion ? 'motion' : 'static');
 
-/* ---------- phone menu ---------- */
-const menuBtn = document.getElementById('menu-btn'), sheet = document.getElementById('sheet');
-if (menuBtn && sheet) {
-  const setMenu = open => {
-    menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.textContent = open ? 'Close' : 'Menu';
-    if (open) {
-      sheet.hidden = false;
-      if (gsap && !reduceMotion) {
-        gsap.fromTo(sheet, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' });
-        gsap.fromTo(sheet.children, { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, ease: 'power3.out' });
-      }
-    } else if (gsap && !reduceMotion) {
-      gsap.to(sheet, { opacity: 0, y: -12, duration: 0.22, ease: 'power2.in', onComplete: () => { sheet.hidden = true; } });
-    } else sheet.hidden = true;
-  };
-  menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) { setMenu(false); menuBtn.focus(); } });
-}
-
 /* ---------- magnetic bar buttons (React Bits "Magnet", in GSAP), as on the pond ---------- */
 if (gsap && finePointer && !reduceMotion) {
-  document.querySelectorAll('.bar .link, .bar .resume, .bar .mark').forEach(el => {
-    const xTo = gsap.quickTo(el, 'x', { duration: 0.35, ease: 'power3' });
-    const yTo = gsap.quickTo(el, 'y', { duration: 0.35, ease: 'power3' });
-    el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); xTo((e.clientX - r.left - r.width / 2) * 0.25); yTo((e.clientY - r.top - r.height / 2) * 0.35); });
-    el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' }));
+  // a gentle lean toward the cursor (kept small so the bar stays calm), settling back without a bounce
+  document.querySelectorAll('.bar .link, .bar .mark').forEach(el => {
+    const xTo = gsap.quickTo(el, 'x', { duration: 0.45, ease: 'power3' });
+    const yTo = gsap.quickTo(el, 'y', { duration: 0.45, ease: 'power3' });
+    el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); xTo((e.clientX - r.left - r.width / 2) * 0.08); yTo((e.clientY - r.top - r.height / 2) * 0.1); });
+    el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.35, ease: 'power3.out' }));
   });
 }
 

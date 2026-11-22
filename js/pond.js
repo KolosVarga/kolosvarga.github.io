@@ -35,7 +35,10 @@ const PAL = {
   petal: '#eef6f2', petalInner: '#ffffff', petalLine: 'rgba(10,50,36,0.35)', lotusCore: '#9fe3c6',
 };
 
-let W = 0, H = 0, DPR = 1, PIX = 2, minD = 1, unit = 1; // DPR here is the render scale: 1 / PIX, for the pixelated LCD look
+let W = 0, H = 0, DPR = 1, PIX = 2, minD = 1, unit = 1;
+// The canvases run on below the pond into the About section (HC is their full height). Instead of fading out,
+// the pond thins out in layers: koi never swim past KOI_LINE, pads never cross PAD_LINE, ripples never reach RIPPLE_LINE.
+let HC = 0, KOI_LINE = 0, PAD_LINE = 0, RIPPLE_LINE = 0; // DPR here is the render scale: 1 / PIX, for the pixelated LCD look
 let water = null;
 let nameBox = { x: 0, y: 0, w: 0, h: 0 }, lotusSpot = { x: 0, y: 0 };
 const ripples = [];
@@ -83,18 +86,22 @@ function placeTitle(L) {
 
 function buildBed() {
   const L = layoutName();
-  const cw = Math.round(W * DPR), ch = Math.round(H * DPR);
+  const cw = Math.round(W * DPR), ch = Math.round(HC * DPR);
   const bed = document.createElement('canvas'); bed.width = cw; bed.height = ch;
   const b = bed.getContext('2d');
   b.scale(DPR, DPR);
   const g = b.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.hypot(W, H) / 2);
   g.addColorStop(0, '#0a1413'); g.addColorStop(1, PAL.bed);
-  b.fillStyle = g; b.fillRect(0, 0, W, H);
+  b.fillStyle = g; b.fillRect(0, 0, W, HC);
+  // below the pond the bed settles into the page's own black, so the water simply becomes the page
+  const settle = b.createLinearGradient(0, H * 0.9, 0, HC);
+  settle.addColorStop(0, 'rgba(5,9,9,0)'); settle.addColorStop(1, PAL.bed);
+  b.fillStyle = settle; b.fillRect(0, H * 0.9, W, HC - H * 0.9);
   // pebbles and silt, barely visible
   for (let i = 0; i < (W * H) / 900; i++) {
     b.globalAlpha = rand(0.3, 0.9);
     b.fillStyle = PAL.bedSpeck[Math.floor(Math.random() * PAL.bedSpeck.length)];
-    b.beginPath(); b.ellipse(rand(0, W), rand(0, H), rand(1, 6), rand(1, 4), rand(0, TAU), 0, TAU); b.fill();
+    b.beginPath(); b.ellipse(rand(0, W), rand(0, H * 0.98), rand(1, 6), rand(1, 4), rand(0, TAU), 0, TAU); b.fill();
   }
   b.globalAlpha = 1;
 
@@ -338,7 +345,7 @@ class Fish {
     this.backFins = [3].map(position => ({ chain: new Chain(x, y, this.gap * 1.5, 120, BACKFIN_POINTS.map(() => 0)), radian: 0, position }));
     this.rippleCooldown = rand(400, 800); this.lastRipple = performance.now();
   }
-  update() { this.cube.update(W, H, true); }
+  update() { this.cube.update(W, KOI_LINE, true); }
   move() {
     const { x, y } = this.cube.getPosition();
     const bc = this.body.circles;
@@ -461,7 +468,7 @@ function makePads() {
   const big = [0.055, 0.075], mid = [0.035, 0.05], small = [0.016, 0.027];
   const top = barBottom();
   const ok = (x, y, r) => {
-    if (x < -r * 0.4 || x > W + r * 0.4 || y < top - r * 0.3 || y > H + r * 0.4) return false;
+    if (x < -r * 0.4 || x > W + r * 0.4 || y < top - r * 0.3 || y + r > PAD_LINE - 6) return false;
     // keep the name readable: only small pads may sit over it
     const nx = clamp(x, nameBox.x, nameBox.x + nameBox.w), ny = clamp(y, nameBox.y, nameBox.y + nameBox.h);
     const overlap = Math.hypot(x - nx, y - ny) < r * 0.85;
@@ -481,7 +488,7 @@ function makePads() {
   // scatter pads evenly over the whole pond: one per cell of a jittered grid, in a mix of sizes
   const target = clamp(Math.round((W * (H - top)) / 22000), 14, 44);
   const cell = Math.sqrt((W * (H - top)) / target);
-  const cols = Math.ceil(W / cell), rows = Math.ceil((H - top) / cell);
+  const cols = Math.ceil(W / cell), rows = Math.ceil((PAD_LINE - top) / cell);
   const cells = [];
   for (let cy = 0; cy < rows; cy++) for (let cx = 0; cx < cols; cx++) cells.push([cx, cy]);
   cells.sort(() => Math.random() - 0.5);
@@ -533,6 +540,8 @@ function updatePads(dt, time) {
     p.vx = (p.vx + fx * dt) * damp; p.vy = (p.vy + fy * dt) * damp;
     p.vr = (p.vr + Math.sin(time * 0.2 + p.seed) * 0.0015) * Math.exp(-dt * 1.5);
     p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+    const lim = PAD_LINE - p.r * (p.lotus ? 1.2 : 1); // a pad pushed toward the line stops at it
+    if (p.y > lim) { p.y = lim; p.vy = Math.min(0, p.vy); }
   }
 }
 
@@ -575,15 +584,17 @@ function drawLotus(c, p) {
 function resize(first = false) {
   const oldW = W || window.innerWidth, oldH = H || window.innerHeight;
   W = pond.clientWidth; H = pond.clientHeight;
+  HC = padCanvas.clientHeight || H;
+  KOI_LINE = H * 1.02; PAD_LINE = H * 1.11; RIPPLE_LINE = Math.min(HC, H * 1.27);
   PIX = clamp(Math.round(Math.max(W, H) / 440), 2, 4); // about 440 "LCD pixels" across the long side
   DPR = 1 / PIX;
   minD = Math.min(W, H) * 0.6 + Math.max(W, H) * 0.25;
   unit = minD * 0.085;
-  surface.width = Math.round(W * DPR); surface.height = Math.round(H * DPR);
+  surface.width = Math.round(W * DPR); surface.height = Math.round(HC * DPR);
   SHARP = Math.min(window.devicePixelRatio || 1, 2);
-  padCanvas.width = Math.round(W * SHARP); padCanvas.height = Math.round(H * SHARP);
+  padCanvas.width = Math.round(W * SHARP); padCanvas.height = Math.round(HC * SHARP);
   if (water) {
-    water.resize(W, H, DPR);
+    water.resize(W, HC, DPR);
     const { bed, name } = buildBed();
     water.setTextures(bed, name);
   } else {
@@ -612,7 +623,7 @@ let specks = [];
 const food = [];
 function makeSpecks() {
   specks = Array.from({ length: Math.round(clamp((W * H) / 9000, 40, 160)) }, () => ({
-    x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, s: rand(0.8, 1.8), a: rand(0.15, 0.45), seed: rand(0, 100)
+    x: rand(0, W), y: rand(0, RIPPLE_LINE), vx: 0, vy: 0, s: rand(0.8, 1.8), a: rand(0.15, 0.45), seed: rand(0, 100)
   }));
 }
 function scatterFood(x, y) {
@@ -636,7 +647,7 @@ function updateSpecks(dt, time) {
     }
     s.vx *= Math.exp(-dt * 1.2); s.vy *= Math.exp(-dt * 1.2);
     s.x += s.vx * dt * 10; s.y += s.vy * dt * 10;
-    if (s.x < 0) s.x += W; if (s.x > W) s.x -= W; if (s.y < 0) s.y += H; if (s.y > H) s.y -= H;
+    if (s.x < 0) s.x += W; if (s.x > W) s.x -= W; if (s.y < 0) s.y += RIPPLE_LINE; if (s.y > RIPPLE_LINE) s.y -= RIPPLE_LINE;
   }
   for (let i = food.length - 1; i >= 0; i--) {
     const f = food[i];
@@ -676,14 +687,22 @@ function frameInner(time, dt) {
   if (water) water.render(time, ripples, reveal.name);
   // low-res layer: specks and ripples
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  ctx.clearRect(0, 0, W, H);
+  ctx.clearRect(0, 0, W, HC);
   ctx.globalAlpha = reveal.life;
   drawSpecks();
   drawRipples();
   ctx.globalAlpha = 1;
+  // rings lose their last strength as they near RIPPLE_LINE and never pass it
+  const band = H * 0.12;
+  const fade = ctx.createLinearGradient(0, RIPPLE_LINE - band, 0, RIPPLE_LINE);
+  fade.addColorStop(0, 'rgba(0,0,0,0)'); fade.addColorStop(1, 'rgba(0,0,0,1)');
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillStyle = fade; ctx.fillRect(0, RIPPLE_LINE - band, W, band);
+  ctx.fillStyle = '#000'; ctx.fillRect(0, RIPPLE_LINE, W, HC - RIPPLE_LINE);
+  ctx.globalCompositeOperation = 'source-over';
   // sharp layer: fish, then lily pads + lotus floating above them
   pctx.setTransform(SHARP, 0, 0, SHARP, 0, 0);
-  pctx.clearRect(0, 0, W, H);
+  pctx.clearRect(0, 0, W, HC);
   pctx.globalAlpha = reveal.life;
   koi.forEach(k => k.fish.draw(pctx, 2 / SHARP));
   pads.forEach(p => (p.lotus ? null : drawPad(pctx, p)));
@@ -720,26 +739,15 @@ pond.addEventListener('pointermove', e => {
   });
 });
 
-// buttons in the top bar tap the water below them and call the fish
-function callFish(el) {
-  const b = el.getBoundingClientRect(), pr = pond.getBoundingClientRect();
-  const x = b.left + b.width / 2 - pr.left;
-  const y = Math.max(barBottom(), b.bottom) - pr.top + minD * 0.06;
-  [0, 0.4, 0.8].forEach((d, i) => gsap.delayedCall(d, () => addRipple(x, y, 0.75 - i * 0.12, { rings: 2, life: 5 })));
-  scatterFood(x, y);
-  koi.forEach(k => k.call(x, y));
-  gsap.fromTo(el, { scale: 0.92 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.45)' });
-  onFirstTouch();
-}
-document.querySelectorAll('.link, .resume').forEach(el => el.addEventListener('click', () => callFish(el)));
 
 // magnetic buttons (React Bits "Magnet", rebuilt with GSAP)
 if (window.matchMedia('(hover: hover)').matches && !reduceMotion) {
-  document.querySelectorAll('.bar .link, .bar .resume, .mark').forEach(el => {
-    const xTo = gsap.quickTo(el, 'x', { duration: 0.35, ease: 'power3' });
-    const yTo = gsap.quickTo(el, 'y', { duration: 0.35, ease: 'power3' });
-    el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); xTo((e.clientX - r.left - r.width / 2) * 0.25); yTo((e.clientY - r.top - r.height / 2) * 0.35); });
-    el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' }));
+  // a gentle lean toward the cursor (kept small so the bar stays calm), settling back without a bounce
+  document.querySelectorAll('.bar .link, .bar .mark').forEach(el => {
+    const xTo = gsap.quickTo(el, 'x', { duration: 0.45, ease: 'power3' });
+    const yTo = gsap.quickTo(el, 'y', { duration: 0.45, ease: 'power3' });
+    el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); xTo((e.clientX - r.left - r.width / 2) * 0.08); yTo((e.clientY - r.top - r.height / 2) * 0.1); });
+    el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.35, ease: 'power3.out' }));
   });
 }
 

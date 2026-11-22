@@ -1,5 +1,5 @@
 /* Home, beyond the pond itself: keeps "Engineer" tucked under the name, reveals the About section
-   as it scrolls in, marks About in the bar while it's on screen, and cycles the "wondering" line.
+   as it scrolls in, and cycles the "wondering" line.
    pond.js is left alone; this only reads where it put the name. */
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root = document.documentElement;
@@ -47,16 +47,6 @@ document.querySelectorAll('[data-in]').forEach(el => {
   el.dataset.i = String(group.indexOf(el));
   io.observe(el);
 });
-
-/* ---------- "About" lights up in the bar while the section is in view ---------- */
-const aboutLink = document.querySelector('.bar a[href="#about"]');
-const about = document.getElementById('about');
-if (aboutLink && about) {
-  new IntersectionObserver(([en]) => {
-    if (en.isIntersecting) aboutLink.setAttribute('aria-current', 'true');
-    else aboutLink.removeAttribute('aria-current');
-  }, { rootMargin: '-45% 0px -45% 0px' }).observe(about);
-}
 
 /* ---------- the wondering line ---------- */
 const btn = document.querySelector('.h-wonder');

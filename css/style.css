@@ -57,60 +57,52 @@ a { color: inherit; text-decoration: none; }
 .hint-touch { display: none; }
 @media (hover: none) { .hint-mouse { display: none; } .hint-touch { display: inline; } }
 
-/* ---------- top bar ---------- */
+/* ---------- top bar: identical on every page (css/style.css and css/site.css carry the same rules) ---------- */
 .bar {
   /* centred with auto margins (not a transform), so GSAP can animate it freely */
   position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); left: 0; right: 0;
-  width: fit-content; margin: 0 auto;
-  display: flex; align-items: center; gap: 4px;
-  padding: 6px;
-  border-radius: 999px;
-  background: var(--glass);
-  border: 1px solid var(--edge);
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  width: fit-content; max-width: calc(100vw - 24px); margin: 0 auto;
+  display: flex; align-items: center; gap: 4px; padding: 6px;
+  border-radius: 999px; background: rgba(7, 15, 14, 0.62); border: 1px solid rgba(150, 230, 200, 0.14);
+  backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
   box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.7);
+  color: #d9ece5; font-family: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  view-transition-name: bar;
 }
 .mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; margin-right: 4px; }
-.mark svg { width: 24px; height: 24px; fill: var(--jade); }
+.mark svg { width: 24px; height: 24px; fill: #2fbf93; }
 .links { display: flex; gap: 2px; }
-.link {
-  position: relative; padding: 10px 16px; border-radius: 999px;
-  font-size: 15px; font-weight: 500; color: var(--mist);
-  transition: background-color .2s, color .2s;
+.bar .link {
+  position: relative; display: inline-block; padding: 10px 16px; border-radius: 999px; text-decoration: none;
+  font-size: 15px; font-weight: 500; color: #d9ece5;
+  transition: background-color .2s ease, color .2s ease;
 }
-.link:hover, .link:focus-visible { background: rgba(47, 191, 147, 0.12); color: #fff; outline: none; }
-.resume {
-  margin-left: 4px; padding: 10px 18px; border-radius: 999px;
-  background: var(--jade); color: #03130d; font-size: 15px; font-weight: 600;
-  transition: background-color .2s;
+@media (hover: hover) and (pointer: fine) { .bar .link:hover { background: rgba(47, 191, 147, 0.1); color: #fff; } }
+.bar .link:focus-visible { background: rgba(47, 191, 147, 0.12); color: #fff; outline: none; }
+.bar .link:active { scale: 0.97; }
+/* where you are: the page's link sits in a jade pill with a short jade rule beneath the word */
+.bar .link[aria-current] { color: #fff; background: rgba(47, 191, 147, 0.18); }
+.bar .link[aria-current]::after {
+  content: ""; position: absolute; left: 50%; bottom: 4px; width: 16px; height: 2px; margin-left: -8px;
+  border-radius: 2px; background: #2fbf93;
 }
-.resume:hover, .resume:focus-visible { background: #4fd8ab; outline: none; }
-.link[aria-current="true"] { background: rgba(47, 191, 147, 0.16); color: #fff; }
-.link:active, .resume:active { scale: 0.97; }
-
 /* phones: every page stays one tap away. The links tighten up instead of folding into a menu,
-   and the mark steps aside on the narrowest screens (the name below is home anyway). */
+   and the mark steps aside on the narrowest screens. */
 @media (max-width: 640px) {
-  .bar { max-width: calc(100vw - 24px); gap: 0; padding: 5px; }
+  .bar { gap: 0; padding: 5px; }
   .mark { width: 34px; height: 34px; margin-right: 0; }
   .mark svg { width: 20px; height: 20px; }
   .links { gap: 0; }
-  .link { padding: 9px 9px; font-size: 14px; }
-  .resume { margin-left: 2px; padding: 9px 12px; font-size: 14px; }
+  .bar .link { padding: 9px 9px; font-size: 14px; }
 }
 @media (max-width: 400px) {
   .mark { display: none; }
-  .link { padding: 9px 7px; }
-  .resume { padding: 9px 10px; }
+  .bar .link { padding: 9px 8px; }
 }
+@media (prefers-reduced-motion: reduce) { .bar .link { transition: none; } }
 
-@media (prefers-reduced-motion: reduce) {
-  .link, .resume { transition: none; }
-}
 
 /* ---------- links + page transitions (the pond itself is unchanged) ---------- */
-.link { text-decoration: none; display: inline-block; }
 .bar { view-transition-name: bar; }
 @view-transition { navigation: auto; }
 ::view-transition-old(root) { animation: vt-out .3s ease both; }

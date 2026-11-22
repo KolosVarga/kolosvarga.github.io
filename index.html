@@ -25,14 +25,12 @@
       <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 A12 12 0 1 0 26.4 22 L16 16 Z" /></svg>
     </a>
     <nav class="links" aria-label="Primary">
-      <!-- Each link taps the water first (pond.js calls the fish over), then home-nav.js walks to the page.
-           About scrolls down to the section below the pond instead. -->
+      <a class="link" href="#top" aria-current="page">Home</a>
       <a class="link" href="projects/">Projects</a>
-      <a class="link" href="#about">About</a>
       <a class="link" href="hobbies/">Hobbies</a>
       <a class="link" href="contact/">Contact</a>
+      <a class="link" href="resume/">Resume</a>
     </nav>
-    <a class="resume" href="resume/">Resume</a>
   </header>
 
   <main id="main">
@@ -84,6 +82,36 @@
             <span>[What would it take to make a prosthetic hand you forget you are wearing?]</span>
             <span>[A question that has nothing to do with school.]</span>
           </template>
+
+          <!-- What I've been listening to, live from Last.fm (Spotify can scrobble to it: last.fm/settings/applications).
+               EDIT: put your Last.fm username in data-lastfm-user and a free API key (last.fm/api/account/create) in data-lastfm-key.
+               Until then it shows the bracketed placeholders below. -->
+          <div class="h-listen" id="listening" data-in data-lastfm-user="" data-lastfm-key="">
+            <div class="h-rec" aria-hidden="true">
+              <svg class="h-disc" viewBox="0 0 100 100">
+                <defs><clipPath id="label-clip"><circle cx="50" cy="50" r="17" /></clipPath></defs>
+                <circle cx="50" cy="50" r="49" fill="#0b1110" />
+                <circle cx="50" cy="50" r="44" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <circle cx="50" cy="50" r="38" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <circle cx="50" cy="50" r="32" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <circle cx="50" cy="50" r="26" fill="none" stroke="#1b2624" stroke-width="0.8" />
+                <path d="M50 4 A46 46 0 0 1 90 28" fill="none" stroke="#2c3b38" stroke-width="1.6" stroke-linecap="round" />
+                <circle cx="50" cy="50" r="17" fill="#2fbf93" />
+                <image class="h-art" clip-path="url(#label-clip)" x="33" y="33" width="34" height="34" href="" preserveAspectRatio="xMidYMid slice" />
+                <circle cx="50" cy="50" r="2" fill="#050909" />
+              </svg>
+              <svg class="h-arm" viewBox="0 0 40 80"><circle cx="30" cy="8" r="5" fill="#2a3633" /><path d="M30 8 L26 58 L18 70" fill="none" stroke="#9fb3ac" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /><rect x="13" y="67" width="9" height="6" rx="1.5" fill="#d9ece5" transform="rotate(30 17 70)" /></svg>
+            </div>
+            <div class="h-listen-body">
+              <p class="h-listen-k"><span class="h-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="h-listen-state">On repeat lately</span></p>
+              <p class="h-now"><a class="h-song" href="https://www.last.fm/" rel="noopener">[Song title]</a><span class="h-artist">[Artist]</span></p>
+              <ol class="h-recent" aria-label="Played before that">
+                <li><span class="t">[Song]</span><span class="a">[Artist]</span></li>
+                <li><span class="t">[Song]</span><span class="a">[Artist]</span></li>
+                <li><span class="t">[Song]</span><span class="a">[Artist]</span></li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -112,5 +140,6 @@
   <script type="module" src="js/pond.js"></script>
   <script type="module" src="js/home-nav.js"></script>
   <script type="module" src="js/home.js"></script>
+  <script type="module" src="js/listening.js"></script>
 </body>
 </html>

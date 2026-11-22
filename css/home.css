@@ -11,12 +11,11 @@
 }
 html { scroll-padding-top: 88px; }
 
-/* the pond fades into the page's black at its lower edge, so the water ends without a seam
-   (pads and fish drifting past the edge dissolve instead of being cut off) */
-.pond #water, .pond #surface, .pond #pads {
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 14vh), transparent);
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 14vh), transparent);
-}
+/* the pond's canvases run on below it, under the top of the About section; pond.js keeps
+   koi, pads and ripples above their own lines, so the water thins out in layers instead of fading */
+.pond { overflow: visible; }
+.pond #water, .pond #surface, .pond #pads { height: 132%; }
+.pond + .h-about, .h-about { z-index: 1; }
 
 /* "Engineer": same face as the name, smaller, set just under it (home.js keeps it there) */
 .subtitle {
@@ -113,4 +112,52 @@ html { scroll-padding-top: 88px; }
   .js-home [data-in].in { transition: opacity .3s ease; }
   .h-wonder-q { transition: opacity .2s ease; }
   .h-wonder-q.out { filter: none; translate: none; }
+}
+
+/* ---------- recently played: a small record player ---------- */
+.h-listen {
+  display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 22px; align-items: center;
+  margin-top: clamp(28px, 4vh, 40px); padding-top: 22px; border-top: 1px solid var(--rule);
+}
+.h-rec { position: relative; width: 112px; height: 104px; }
+.h-disc { position: absolute; left: 0; top: 4px; width: 96px; height: 96px; }
+.h-arm {
+  position: absolute; right: -4px; top: -4px; width: 40px; height: 80px;
+  transform-origin: 30px 8px; transform: rotate(-16deg);
+  transition: transform .7s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.h-listen.playing .h-arm { transform: rotate(6deg); }      /* the needle drops onto the record */
+.h-listen.playing .h-disc, .h-listen.demo .h-disc { animation: spin 1.8s linear infinite; } /* 33⅓ rpm */
+.h-listen.demo .h-disc { animation-duration: 6s; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.h-listen-k { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--koi); font-size: 15px; }
+.h-eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.h-eq i { display: block; width: 3px; height: 100%; background: var(--koi); transform-origin: bottom; transform: scaleY(0.25); }
+.h-listen.playing .h-eq i { animation: eq 0.9s ease-in-out infinite alternate; }
+.h-listen.playing .h-eq i:nth-child(2) { animation-duration: 0.62s; }
+.h-listen.playing .h-eq i:nth-child(3) { animation-duration: 0.78s; animation-delay: -0.3s; }
+.h-listen.playing .h-eq i:nth-child(4) { animation-duration: 0.55s; animation-delay: -0.15s; }
+@keyframes eq { from { transform: scaleY(0.2); } to { transform: scaleY(1); } }
+
+.h-now { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; margin: 8px 0 0; transition: opacity .26s var(--ease-out), translate .26s var(--ease-out); }
+.h-song { font-family: var(--serif); font-size: clamp(1.15rem, 1.8vw, 1.4rem); line-height: 1.25; color: #eef6f2; }
+@media (hover: hover) and (pointer: fine) { .h-song:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--jade); text-underline-offset: 0.2em; } }
+.h-artist { color: var(--ink-dim); font-size: 15px; }
+.h-recent { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 3px; font-size: 14px; color: var(--ink-faint); transition: opacity .26s var(--ease-out); }
+.h-recent li { display: flex; gap: 8px; min-width: 0; }
+.h-recent .t { color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.h-recent .a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.h-recent .w { margin-left: auto; padding-left: 8px; white-space: nowrap; }
+.h-listen.changing .h-now { opacity: 0; translate: 0 -6px; }
+.h-listen.changing .h-recent { opacity: 0; }
+@media (max-width: 520px) {
+  .h-listen { grid-template-columns: 84px minmax(0, 1fr); gap: 16px; }
+  .h-rec { width: 84px; height: 80px; }
+  .h-disc { width: 72px; height: 72px; }
+  .h-arm { width: 30px; height: 60px; transform-origin: 22.5px 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-listen .h-disc, .h-listen .h-eq i { animation: none !important; }
+  .h-arm, .h-now, .h-recent { transition: none; }
 }

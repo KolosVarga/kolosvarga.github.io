@@ -10,6 +10,14 @@ Personal website. Plain HTML/CSS/JS with no build step, served by GitHub Pages.
 Below the pond the home page scrolls into a short About section and a row of links (Resume, GitHub, LinkedIn,
 Email, Instagram): `css/home.css`, `js/home.js`. The links are placeholders in `index.html`.
 
+The pond's canvases run on a little way under the About section. Rather than fading out, the pond thins out in
+layers: koi stay above one line, lily pads above a slightly lower one, and ripples die out before a third
+(`KOI_LINE`, `PAD_LINE`, `RIPPLE_LINE` in `js/pond.js`).
+
+**Recently played** (`js/listening.js`) is a small record player fed by Last.fm. To make it live, connect Spotify
+to Last.fm (last.fm/settings/applications), create a free API key (last.fm/api/account/create), and put your
+username and key in the `data-lastfm-user` / `data-lastfm-key` attributes of `#listening` in `index.html`.
+
 ## The other rooms
 Each page is its own folder with an `index.html`, so URLs stay clean (`/projects/`, `/hobbies/` …). `/about/` now just forwards to the About section on the home page..
 Shared look and behaviour: `css/site.css` (colour tokens, type, the bar) and `js/site.js` (menu, magnetic bar,
@@ -17,7 +25,7 @@ Lenis, headline split, scroll reveals, and a loop helper that pauses canvases wh
 
 | Page | Small interactive identity | Files |
 | --- | --- | --- |
-| Projects | a pixel-art space scene: ships fly between planets, chase and shoot; grab one and throw it (at a planet, it explodes); sketches draw themselves in | `css/projects.css`, `js/space.js`, `js/projects.js` |
+| Projects | a pixel-art space scene: ships fly between planets, chase and shoot; grab one and throw it (at a planet, it explodes).; sketches draw themselves in | `css/projects.css`, `js/space.js`, `js/projects.js` |
 | Resume | cool paper, a ruler down the edge, a caliper that measures how far you have read; prints cleanly | `css/resume.css`, `js/resume.js` |
 | Hobbies | a pixel pond: frogs hop between pads and go for dragonflies; fish idle below | `css/hobbies.css`, `js/hobbies.js` |
 | Contact | paper scraps drifting on water, which you can grab and toss | `css/contact.css`, `js/contact.js` |
