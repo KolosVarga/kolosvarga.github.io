@@ -128,3 +128,37 @@
 .ledger li span { color: var(--ink-dim); grid-column: 1; font-size: 15px; }
 .ledger li i { font-style: normal; font-family: var(--mono); font-size: 13px; color: var(--ink-faint); grid-row: 1; grid-column: 2; }
 @media (max-width: 860px) { .ledger { grid-template-columns: 1fr; } }
+
+/* Project stories live directly below their disclosure bars. Native details is intentionally
+   used here: closed projects take no space and remain usable without JavaScript. */
+.p-directions { margin: 0 0 20px; color: var(--ink-dim); }
+.project-panel { border-top: 1px solid var(--rule); scroll-margin-top: 100px; }
+.project-panel:last-child { border-bottom: 1px solid var(--rule); }
+.project-panel > summary {
+  list-style: none; cursor: pointer; display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto auto 24px;
+  gap: 12px 24px; align-items: center; padding: 25px 0;
+  transition: color .18s ease, background-color .18s ease;
+}
+.project-panel > summary::-webkit-details-marker { display: none; }
+.project-panel > summary .t { font-weight: 400; }
+.project-panel > summary:focus-visible { outline: 2px solid var(--jade); outline-offset: 6px; border-radius: 3px; }
+.project-panel[open] > summary .n { color: var(--jade); }
+.project-panel[open] > summary .t { color: var(--ink); }
+.p-toggle { width: 20px; height: 20px; position: relative; justify-self: end; }
+.p-toggle::before, .p-toggle::after { content: ''; position: absolute; background: var(--ink-dim); left: 2px; top: 9px; width: 16px; height: 1px; }
+.p-toggle::after { transform: rotate(90deg); transition: transform .18s var(--ease-out); }
+.project-panel[open] > summary .p-toggle::after { transform: rotate(0deg); }
+.project-content { padding: 22px 0 64px; }
+.project-content .story, .project-content .ledger { margin-top: 0; width: 100%; padding-inline: 0; }
+.project-content .story { padding-top: 24px; }
+.project-content .s-lead .s-num { font-size: clamp(5rem, 10vw, 9rem); }
+@media (hover: hover) and (pointer: fine) { .project-panel > summary:hover .t, .project-panel > summary:hover .p-toggle::before { color: var(--jade); } }
+@media (max-width: 720px) {
+  .project-panel > summary { grid-template-columns: 28px minmax(0, 1fr) 22px; gap: 6px 12px; padding: 23px 0; }
+  .project-panel > summary .k { grid-column: 2; font-size: 13px; }
+  .project-panel > summary .y { display: none; }
+  .project-panel > summary .p-toggle { grid-column: 3; grid-row: 1 / span 2; }
+  .project-content { padding-bottom: 36px; }
+}
+@media (prefers-reduced-motion: reduce) { .p-toggle::after { transition: none; } }

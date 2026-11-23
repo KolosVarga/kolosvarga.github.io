@@ -19,15 +19,14 @@ to Last.fm (last.fm/settings/applications), create a free API key (last.fm/api/a
 username and key in the `data-lastfm-user` / `data-lastfm-key` attributes of `#listening` in `index.html`.
 
 ## The other rooms
-Each page is its own folder with an `index.html`, so URLs stay clean (`/projects/`, `/hobbies/` …). `/about/` now just forwards to the About section on the home page..
+Each page is its own folder with an `index.html`, so URLs stay clean (`/projects/`, `/contact/` …). `/about/` now just forwards to the About section on the home page..
 Shared look and behaviour: `css/site.css` (colour tokens, type, the bar) and `js/site.js` (menu, magnetic bar,
 Lenis, headline split, scroll reveals, and a loop helper that pauses canvases when they are off screen).
 
 | Page | Small interactive identity | Files |
 | --- | --- | --- |
-| Projects | a pixel-art space scene: ships fly between planets, chase and shoot; grab one and throw it (at a planet, it explodes).; sketches draw themselves in | `css/projects.css`, `js/space.js`, `js/projects.js` |
+| Projects | A pixel-art space scene: ships fly between planets, chase and shoot. Project bars expand their stories on click and close on the next click; all start closed. | `css/projects.css`, `js/space.js`, `js/projects.js` |
 | Resume | cool paper, a ruler down the edge, a caliper that measures how far you have read; prints cleanly | `css/resume.css`, `js/resume.js` |
-| Hobbies | a pixel pond: frogs hop between pads and go for dragonflies; fish idle below | `css/hobbies.css`, `js/hobbies.js` |
 | Contact | paper scraps drifting on water, which you can grab and toss | `css/contact.css`, `js/contact.js` |
 
 On the pond, `js/home-nav.js` lets a nav click ripple the water for half a second before following the link,
